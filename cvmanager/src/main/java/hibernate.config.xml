@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.url">jdbc:oracle:thin:@80.65.65.66:1521:etflab</property>
+    <property name="connection.driver_class">oracle.jdbc.OracleDriver</property>
+      <mapping class="domain.ComponentEntity"/>
+      <mapping class="domain.ComponentdraftEntity"/>
+      <mapping class="domain.ComponenttypeEntity"/>
+      <mapping class="domain.LogEntity"/>
+      <mapping class="domain.UserEntity"/>
+      <mapping class="domain.UserinfoEntity"/>
+      <!-- DB schema will be updated if needed -->
+    <!-- <property name="hbm2ddl.auto">update</property> -->
+  </session-factory>
+</hibernate-configuration>
