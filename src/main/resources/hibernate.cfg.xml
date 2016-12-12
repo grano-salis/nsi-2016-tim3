@@ -9,6 +9,12 @@
         <property name="connection.username">NSI03</property>
         <property name="connection.password">tTt03#</property>
 
+        <property name="hibernate.c3p0.min_size">5</property>
+        <property name="hibernate.c3p0.max_size">20</property>
+        <property name="hibernate.c3p0.timeout">300</property>
+        <property name="hibernate.c3p0.max_statements">50</property>
+        <property name="hibernate.c3p0.idle_test_period">3000</property>
+
         <mapping resource="mappings.xml"/>
         <mapping class="ba.unsa.etf.nsi.charlie.model.ComponentEntity"/>
         <mapping class="ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity"/>
@@ -18,7 +24,6 @@
         <mapping class="ba.unsa.etf.nsi.charlie.model.UserInfoEntity"/>
         <mapping class="ba.unsa.etf.nsi.charlie.model.UserRoleEntity"/>
         <mapping class="ba.unsa.etf.nsi.charlie.model.UserEntity"/>
-
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
