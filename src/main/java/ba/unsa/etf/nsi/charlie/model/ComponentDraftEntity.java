@@ -15,9 +15,9 @@ public class ComponentDraftEntity {
     private Long userid;
     private Long componenttype;
     private String data;
-    private ComponentEntity componentByComponentid;
-    private UserEntity userByUserid;
-    private ComponentTypeEntity componenttypeByComponenttype;
+    private transient ComponentEntity componentByComponentid;
+    private transient UserEntity userByUserid;
+    private transient ComponentTypeEntity componenttypeByComponenttype;
 
     @Id
     @Column(name = "ID", nullable = false, precision = 0)
