@@ -9,7 +9,7 @@
         <property name="connection.username">NSI03</property>
         <property name="connection.password">tTt03#</property>
 
-        <mapping resource="ba/unsa/etf/nsi/charlie/model/mappings.xml"/>
+        <mapping resource="mappings.xml"/>
         <mapping class="ba.unsa.etf.nsi.charlie.model.ComponentEntity"/>
         <mapping class="ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity"/>
         <mapping class="ba.unsa.etf.nsi.charlie.model.ComponentTypeEntity"/>

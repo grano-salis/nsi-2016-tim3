@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="nsi-2016-tim3:Web exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/nsi_2016_tim3_Web_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="nsi-2016-tim3/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="nsi-2016-tim3" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Hibernate 5.2.3-5.2.3" />
+          <element id="library" level="project" name="ojdbc6-12.1.0.2" />
+          <element id="library" level="project" name="Jersey-2.2" />
+          <element id="library" level="project" name="com.google.code.gson:gson:2.8.0" />
+          <element id="library" level="project" name="xdb6" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

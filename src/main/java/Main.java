@@ -1,9 +1,9 @@
+import ba.unsa.etf.nsi.charlie.*;
 import ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity;
 import ba.unsa.etf.nsi.charlie.model.ComponentTypeEntity;
 import org.hibernate.*;
-import org.hibernate.query.Query;
 import org.hibernate.cfg.Configuration;
-
+import org.hibernate.query.Query;
 import javax.persistence.metamodel.EntityType;
 
 import java.util.List;
@@ -13,22 +13,6 @@ import java.util.Map;
  * Created by koljenovic on 12/12/2016.
  */
 public class Main {
-    private static final SessionFactory ourSessionFactory;
-
-    static {
-        try {
-            Configuration configuration = new Configuration();
-            configuration.configure();
-
-            ourSessionFactory = configuration.buildSessionFactory();
-        } catch (Throwable ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-
-    public static Session getSession() throws HibernateException {
-        return ourSessionFactory.openSession();
-    }
 
     private static void printAll(Session session) {
         System.out.println("querying all the managed entities...");
@@ -45,7 +29,8 @@ public class Main {
 
     // PRIMJER
     public static void main(final String[] args) throws Exception {
-        final Session session = getSession();
+        final Session session = HibernateHelper.getSession();
+
         try {
             Transaction tx = session.beginTransaction();
             List<ComponentTypeEntity> results = session
