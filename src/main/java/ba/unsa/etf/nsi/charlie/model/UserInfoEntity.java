@@ -11,7 +11,7 @@ public class UserInfoEntity {
     private long id;
     private String firstname;
     private String lastname;
-    private UserEntity userById;
+    private transient UserEntity userById;
 
     @Id
     @Column(name = "ID", nullable = false, precision = 0)

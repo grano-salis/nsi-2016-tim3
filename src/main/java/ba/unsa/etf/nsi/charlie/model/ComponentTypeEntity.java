@@ -11,8 +11,8 @@ import java.util.Collection;
 public class ComponentTypeEntity {
     private int id;
     private String componenttype;
-    private Collection<ComponentEntity> componentsById;
-    private Collection<ComponentDraftEntity> componentdraftsById;
+    private transient Collection<ComponentEntity> componentsById;
+    private transient Collection<ComponentDraftEntity> componentdraftsById;
 
     @Id
     @Column(name = "ID", nullable = false, precision = 0)

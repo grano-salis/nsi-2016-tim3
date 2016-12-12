@@ -11,7 +11,7 @@ import java.util.Collection;
 public class RoleEntity {
     private long id;
     private String name;
-    private Collection<UserRoleEntity> userrolesById;
+    private transient Collection<UserRoleEntity> userrolesById;
 
     @Id
     @Column(name = "ID", nullable = false, precision = 0)

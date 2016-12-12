@@ -17,9 +17,9 @@ public class ComponentEntity {
     private String additionalinfo;
     private Long componenttype;
     private String data;
-    private UserEntity userByUserid;
-    private ComponentTypeEntity componenttypeByComponenttype;
-    private Collection<ComponentDraftEntity> componentdraftsById;
+    private transient UserEntity userByUserid;
+    private transient ComponentTypeEntity componenttypeByComponenttype;
+    private transient Collection<ComponentDraftEntity> componentdraftsById;
 
     @Id
     @Column(name = "ID", nullable = false, precision = 0)

@@ -11,8 +11,8 @@ public class UserRoleEntity {
     private long userid;
     private long roleid;
     private long id;
-    private UserEntity userByUserid;
-    private RoleEntity roleByRoleid;
+    private transient UserEntity userByUserid;
+    private transient RoleEntity roleByRoleid;
 
     @Basic
     @Column(name = "USERID", nullable = false, precision = 0)

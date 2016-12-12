@@ -13,7 +13,7 @@ public class LogEntity {
     private int userId;
     private String logText;
     private Time created;
-    private UserEntity userByUserId;
+    private transient UserEntity userByUserId;
 
     @Id
     @Column(name = "ID", nullable = false, precision = 0)

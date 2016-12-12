@@ -14,11 +14,11 @@ public class UserEntity {
     private String email;
     private String emailconfirmed;
     private String passwordhash;
-    private Collection<ComponentEntity> componentsById;
-    private Collection<ComponentDraftEntity> componentdraftsById;
-    private Collection<LogEntity> logsById;
-    private UserInfoEntity userinfoById;
-    private Collection<UserRoleEntity> userrolesById;
+    private transient Collection<ComponentEntity> componentsById;
+    private transient Collection<ComponentDraftEntity> componentdraftsById;
+    private transient Collection<LogEntity> logsById;
+    private transient UserInfoEntity userinfoById;
+    private transient Collection<UserRoleEntity> userrolesById;
 
     @Id
     @Column(name = "ID", nullable = false, precision = 0)
