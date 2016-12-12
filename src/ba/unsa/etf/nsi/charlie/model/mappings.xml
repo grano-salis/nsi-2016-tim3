@@ -9,74 +9,74 @@
             <column name="ID" sql-type="number(*)" precision="2147483646"/>
         </id>
         <property name="userid" insert="false" update="false">
-            <column name="USERID" sql-type="number(*)" precision="2147483646"/>
+            <column name="USERID" sql-type="number(*)" precision="2147483646" not-null="true"/>
         </property>
         <property name="title">
-            <column name="TITLE" sql-type="nvarchar2(50)" length="50" not-null="true"/>
+            <column name="TITLE" sql-type="nvarchar2(50)" length="50"/>
         </property>
         <property name="updated">
-            <column name="UPDATED" sql-type="date" not-null="true"/>
+            <column name="UPDATED" sql-type="date"/>
         </property>
         <property name="additionalinfo">
-            <column name="ADDITIONALINFO" sql-type="nclob" not-null="true"/>
+            <column name="ADDITIONALINFO" sql-type="nclob"/>
         </property>
         <property name="componenttype" insert="false" update="false">
-            <column name="COMPONENTTYPE" sql-type="number(*)" precision="2147483646" not-null="true"/>
+            <column name="COMPONENTTYPE" sql-type="number(*)" precision="2147483646"/>
         </property>
         <property name="data">
-            <column name="DATA" sql-type="public.xmltype" not-null="true"/>
+            <column name="DATA" sql-type="public.xmltype"/>
         </property>
         <many-to-one name="userByUserid" class="ba.unsa.etf.nsi.charlie.model.UserEntity">
             <column name="USERID"/>
         </many-to-one>
         <many-to-one name="componenttypeByComponenttype" class="ba.unsa.etf.nsi.charlie.model.ComponentTypeEntity">
-            <column name="COMPONENTTYPE" not-null="true"/>
+            <column name="COMPONENTTYPE"/>
         </many-to-one>
         <set name="componentdraftsById" inverse="true">
             <key>
-                <column name="COMPONENTID" not-null="true"/>
+                <column name="COMPONENTID"/>
             </key>
             <one-to-many not-found="ignore" class="ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity"/>
         </set>
     </class>
     <class name="ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity" table="COMPONENTDRAFT" schema="NSI03">
         <id name="id">
-            <column name="ID" sql-type="number(*)" precision="2147483646"/>
+            <column name="ID" sql-type="number(*)" precision="2147483646" not-null="true"/>
         </id>
         <property name="componentid" insert="false" update="false">
-            <column name="COMPONENTID" sql-type="number(*)" precision="2147483646" not-null="true"/>
+            <column name="COMPONENTID" sql-type="number(*)" precision="2147483646"/>
         </property>
         <property name="status">
-            <column name="STATUS" sql-type="varchar2(100)" length="100" not-null="true"/>
+            <column name="STATUS" sql-type="varchar2(100)" length="100"/>
         </property>
         <property name="additionalinfo">
-            <column name="ADDITIONALINFO" sql-type="varchar2(100)" length="100" not-null="true"/>
+            <column name="ADDITIONALINFO" sql-type="varchar2(100)" length="100"/>
         </property>
         <property name="userid" insert="false" update="false">
-            <column name="USERID" sql-type="number(*)" precision="2147483646" not-null="true"/>
+            <column name="USERID" sql-type="number(*)" precision="2147483646"/>
         </property>
         <property name="componenttype" insert="false" update="false">
-            <column name="COMPONENTTYPE" sql-type="number(*)" precision="2147483646" not-null="true"/>
+            <column name="COMPONENTTYPE" sql-type="number(*)" precision="2147483646"/>
         </property>
         <property name="data">
-            <column name="DATA" sql-type="public.xmltype" not-null="true"/>
+            <column name="DATA" sql-type="public.xmltype"/>
         </property>
         <many-to-one name="componentByComponentid" class="ba.unsa.etf.nsi.charlie.model.ComponentEntity">
-            <column name="COMPONENTID" not-null="true"/>
+            <column name="COMPONENTID"/>
         </many-to-one>
         <many-to-one name="userByUserid" class="ba.unsa.etf.nsi.charlie.model.UserEntity">
-            <column name="USERID" not-null="true"/>
+            <column name="USERID"/>
         </many-to-one>
         <many-to-one name="componenttypeByComponenttype" class="ba.unsa.etf.nsi.charlie.model.ComponentTypeEntity">
-            <column name="COMPONENTTYPE" not-null="true"/>
+            <column name="COMPONENTTYPE"/>
         </many-to-one>
     </class>
     <class name="ba.unsa.etf.nsi.charlie.model.ComponentTypeEntity" table="COMPONENTTYPE" schema="NSI03">
         <id name="id">
-            <column name="ID" sql-type="number(10)" precision="10"/>
+            <column name="ID" sql-type="number(10)" precision="10" not-null="true"/>
         </id>
         <property name="componenttype">
-            <column name="COMPONENTTYPE" sql-type="varchar2(35)" length="35"/>
+            <column name="COMPONENTTYPE" sql-type="varchar2(35)" length="35" not-null="true"/>
         </property>
         <set name="componentsById" inverse="true">
             <key>
@@ -96,16 +96,16 @@
             <column name="ID" sql-type="number(10)" precision="10"/>
         </id>
         <property name="userId" insert="false" update="false">
-            <column name="USER_ID" sql-type="number(10)" precision="10"/>
+            <column name="USER_ID" sql-type="number(10)" precision="10" not-null="true"/>
         </property>
         <property name="logText">
-            <column name="LOG_TEXT" sql-type="varchar2(200)" length="200"/>
+            <column name="LOG_TEXT" sql-type="varchar2(200)" length="200" not-null="true"/>
         </property>
         <property name="created">
-            <column name="CREATED" sql-type="date"/>
+            <column name="CREATED" sql-type="date" not-null="true"/>
         </property>
         <many-to-one name="userByUserId" class="ba.unsa.etf.nsi.charlie.model.UserEntity">
-            <column name="USER_ID"/>
+            <column name="USER_ID" not-null="true"/>
         </many-to-one>
     </class>
     <class name="ba.unsa.etf.nsi.charlie.model.RoleEntity" table="ROLE" schema="NSI03">
