@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -53,14 +54,20 @@ public class ModelFront {
             String jsonData)
     {
         Session s = HibernateHelper.getSession();
+        Transaction t = s.beginTransaction();
         String r = "{}";
         Class<?> classType = findClassType(entityType);
 
         final GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setPrettyPrinting();
+        gsonBuilder.serializeNulls();
         gsonBuilder.registerTypeAdapter(ComponentEntity.class, new ComponentDeserializer());
         final Gson g = gsonBuilder.create();
         ComponentEntity ce = g.fromJson(jsonData, ComponentEntity.class);
+        s.flush();
+        s.saveOrUpdate(ce);
+        t.commit();
+        s.close();
         return Response.status(200).entity(g.toJson(ce, ComponentEntity.class)).build();
     }
 
