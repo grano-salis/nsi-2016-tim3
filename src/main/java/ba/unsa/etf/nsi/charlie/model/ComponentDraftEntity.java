@@ -13,7 +13,7 @@ public class ComponentDraftEntity {
     private String status;
     private String additionalinfo;
     private Long userid;
-    private Long componenttype;
+    private Integer componenttype;
     private String data;
     private transient ComponentEntity componentByComponentid;
     private transient UserEntity userByUserid;
@@ -71,11 +71,11 @@ public class ComponentDraftEntity {
 
     @Basic
     @Column(name = "COMPONENTTYPE", nullable = true, precision = 0)
-    public Long getComponenttype() {
+    public int getComponenttype() {
         return componenttype;
     }
 
-    public void setComponenttype(Long componenttype) {
+    public void setComponenttype(int componenttype) {
         this.componenttype = componenttype;
     }
 

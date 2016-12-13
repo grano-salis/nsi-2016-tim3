@@ -9,6 +9,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.TypeMismatchException;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -26,6 +27,8 @@ public class ModelFront {
             gsonBuilder.serializeNulls();
             gsonBuilder.setDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
             gsonBuilder.registerTypeAdapter(ComponentEntity.class, new ComponentDeserializer());
+            gsonBuilder.registerTypeAdapter(ComponentDraftEntity.class, new ComponentDraftDeserializer());
+            gsonBuilder.registerTypeAdapter(ComponentTypeEntity.class, new ComponentTypeDeserializer());
         }
         return gsonBuilder;
     }
@@ -73,11 +76,10 @@ public class ModelFront {
 
         final Gson g = getBuilder().create();
         Object entity = g.fromJson(jsonData, classType);
-        s.flush();
         s.saveOrUpdate(classType.cast(entity));
         t.commit();
         s.close();
-        return Response.status(200).entity(g.toJson(entity, ComponentEntity.class)).build();
+        return Response.status(200).entity(g.toJson(entity, classType)).build();
     }
 
     @GET
@@ -92,7 +94,12 @@ public class ModelFront {
         Class<?> classType = findClassType(entityType);
 
         try {
-            Object entity = s.get(classType, id);
+            Object entity;
+            try {
+                entity = s.get(classType, id);
+            } catch (TypeMismatchException e) {
+                entity = s.get(classType, id.intValue());
+            }
             if (entity != null) {
                 final Gson g = getBuilder().create();
                 r = g.toJson(classType.cast(entity), classType);
