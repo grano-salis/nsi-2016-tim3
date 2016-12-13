@@ -1,59 +1,81 @@
 package ba.unsa.etf.nsi.charlie.rest;
 
 import ba.unsa.etf.nsi.charlie.HibernateHelper;
+import ba.unsa.etf.nsi.charlie.model.*;
+import ba.unsa.etf.nsi.charlie.model.deserializer.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import org.hibernate.Session;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("/rest")
 public class ModelFront {
 
+    protected Class<?> findClassType(final String entityType) {
+        try {
+            switch (entityType) {
+                case "component":
+                    return Class.forName("ba.unsa.etf.nsi.charlie.model.ComponentEntity");
+                case "componentdraft":
+                    return Class.forName("ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity");
+                case "componenttype":
+                    return Class.forName("ba.unsa.etf.nsi.charlie.model.ComponentTypeEntity");
+                case "log":
+                    return Class.forName("ba.unsa.etf.nsi.charlie.model.LogEntity");
+                case "role":
+                    return Class.forName("ba.unsa.etf.nsi.charlie.model.RoleEntity");
+                case "user":
+                    return Class.forName("ba.unsa.etf.nsi.charlie.model.UserEntity");
+                case "userinfo":
+                    return Class.forName("ba.unsa.etf.nsi.charlie.model.UserInfoEntity");
+                case "userrole":
+                    return Class.forName("ba.unsa.etf.nsi.charlie.model.UserRoleEntity");
+                default:
+                    throw new IllegalArgumentException("Invalid API endpoint: " + entityType);
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @POST
+    @Path("{entityType}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response saveEntity(
+            @PathParam("entityType") String entityType,
+            String jsonData)
+    {
+        Session s = HibernateHelper.getSession();
+        String r = "{}";
+        Class<?> classType = findClassType(entityType);
+
+        final GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.setPrettyPrinting();
+        gsonBuilder.registerTypeAdapter(ComponentEntity.class, new ComponentDeserializer());
+        final Gson g = gsonBuilder.create();
+        ComponentEntity ce = g.fromJson(jsonData, ComponentEntity.class);
+        return Response.status(200).entity(g.toJson(ce, ComponentEntity.class)).build();
+    }
+
     @GET
     @Path("{entityType}/{id}")
-    @Produces("application/json")
-    public String getEntity(
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getEntity(
             @PathParam("entityType") String entityType,
             @PathParam("id") Long id)
     {
         Session s = HibernateHelper.getSession();
         String r = "{}";
-        Class<?> classType = null;
+        Class<?> classType = findClassType(entityType);
 
         try {
-            switch (entityType) {
-                case "component":
-                    classType = Class.forName("ba.unsa.etf.nsi.charlie.model.ComponentEntity");
-                    break;
-                case "componentdraft":
-                    classType = Class.forName("ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity");
-                    break;
-                case "componenttype":
-                    classType = Class.forName("ba.unsa.etf.nsi.charlie.model.ComponentTypeEntity");
-                    break;
-                case "log":
-                    classType = Class.forName("ba.unsa.etf.nsi.charlie.model.LogEntity");
-                    break;
-                case "role":
-                    classType = Class.forName("ba.unsa.etf.nsi.charlie.model.RoleEntity");
-                    break;
-                case "sso_user":
-                    classType = Class.forName("ba.unsa.etf.nsi.charlie.model.UserEntity");
-                    break;
-                case "userinfo":
-                    classType = Class.forName("ba.unsa.etf.nsi.charlie.model.UserInfoEntity");
-                    break;
-                case "userrole":
-                    classType = Class.forName("ba.unsa.etf.nsi.charlie.model.UserRoleEntity");
-                    break;
-                default:
-                    throw new IllegalArgumentException("Invalid API endpoint: " + entityType);
-            }
-
             Object cde = s.get(classType, id);
             if (cde != null) {
                 final GsonBuilder gsonBuilder = new GsonBuilder();
@@ -61,14 +83,11 @@ public class ModelFront {
                 final Gson g = gsonBuilder.create();
                 r = g.toJson(classType.cast(cde), classType);
             }
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         } catch (Throwable e) {
             throw new ExceptionInInitializerError(e);
         } finally {
             s.close();
         }
-        return r;
+        return Response.status(200).entity(r).build();
     }
 }

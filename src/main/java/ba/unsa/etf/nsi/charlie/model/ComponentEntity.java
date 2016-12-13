@@ -3,6 +3,7 @@ package ba.unsa.etf.nsi.charlie.model;
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by koljenovic on 12/12/2016.
@@ -13,9 +14,9 @@ public class ComponentEntity {
     private long id;
     private long userid;
     private String title;
-    private Time updated;
+    private Date updated;
     private String additionalinfo;
-    private Long componenttype;
+    private Integer componenttype;
     private String data;
     private transient UserEntity userByUserid;
     private transient ComponentTypeEntity componenttypeByComponenttype;
@@ -53,11 +54,11 @@ public class ComponentEntity {
 
     @Basic
     @Column(name = "UPDATED", nullable = true)
-    public Time getUpdated() {
+    public Date getUpdated() {
         return updated;
     }
 
-    public void setUpdated(Time updated) {
+    public void setUpdated(Date updated) {
         this.updated = updated;
     }
 
@@ -73,11 +74,11 @@ public class ComponentEntity {
 
     @Basic
     @Column(name = "COMPONENTTYPE", nullable = true, precision = 0)
-    public Long getComponenttype() {
+    public Integer getComponenttype() {
         return componenttype;
     }
 
-    public void setComponenttype(Long componenttype) {
+    public void setComponenttype(Integer componenttype) {
         this.componenttype = componenttype;
     }
 

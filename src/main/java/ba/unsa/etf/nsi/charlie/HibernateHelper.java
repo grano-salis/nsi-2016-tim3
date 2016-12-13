@@ -11,15 +11,22 @@ import org.hibernate.cfg.Configuration;
  */
 public class HibernateHelper {
 
-    private static SessionFactory initFactory() {
-        try {
-            Configuration configuration = new Configuration();
-            configuration.configure();
+    public static SessionFactory factory = null;
 
-            return configuration.buildSessionFactory();
+    private HibernateHelper() {
+    }
+
+    private static synchronized SessionFactory initFactory() {
+        try {
+            if (factory == null) {
+                Configuration configuration = new Configuration();
+                configuration.configure();
+                factory = configuration.buildSessionFactory();
+            }
         } catch (Throwable ex) {
             throw new ExceptionInInitializerError(ex);
         }
+        return factory;
     }
 
     public static Session getSession() throws HibernateException {
