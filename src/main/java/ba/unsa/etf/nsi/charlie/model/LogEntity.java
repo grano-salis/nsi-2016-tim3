@@ -2,6 +2,7 @@ package ba.unsa.etf.nsi.charlie.model;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.Date;
 
 /**
  * Created by koljenovic on 12/12/2016.
@@ -10,9 +11,9 @@ import java.sql.Time;
 @Table(name = "LOG", schema = "NSI03", catalog = "")
 public class LogEntity {
     private int id;
-    private int userId;
+    private Long userId;
     private String logText;
-    private Time created;
+    private Date created;
     private transient UserEntity userByUserId;
 
     @Id
@@ -27,11 +28,11 @@ public class LogEntity {
 
     @Basic
     @Column(name = "USER_ID", nullable = false, precision = 0)
-    public int getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -47,11 +48,11 @@ public class LogEntity {
 
     @Basic
     @Column(name = "CREATED", nullable = false)
-    public Time getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public void setCreated(Time created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
 
@@ -73,7 +74,7 @@ public class LogEntity {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + userId;
+        result = 31 * result + userId.intValue();
         result = 31 * result + (logText != null ? logText.hashCode() : 0);
         result = 31 * result + (created != null ? created.hashCode() : 0);
         return result;

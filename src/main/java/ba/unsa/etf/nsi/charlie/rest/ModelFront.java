@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.hibernate.Session;
+import org.hibernate.StaleStateException;
 import org.hibernate.Transaction;
 import org.hibernate.TypeMismatchException;
 
@@ -29,6 +30,7 @@ public class ModelFront {
             gsonBuilder.registerTypeAdapter(ComponentEntity.class, new ComponentDeserializer());
             gsonBuilder.registerTypeAdapter(ComponentDraftEntity.class, new ComponentDraftDeserializer());
             gsonBuilder.registerTypeAdapter(ComponentTypeEntity.class, new ComponentTypeDeserializer());
+            gsonBuilder.registerTypeAdapter(LogEntity.class, new LogDeserializer());
         }
         return gsonBuilder;
     }
@@ -77,7 +79,11 @@ public class ModelFront {
         final Gson g = getBuilder().create();
         Object entity = g.fromJson(jsonData, classType);
         s.saveOrUpdate(classType.cast(entity));
-        t.commit();
+        try {
+            t.commit();
+        } catch (Exception e) {
+            return Response.status(404).entity(r).build();
+        }
         s.close();
         return Response.status(200).entity(g.toJson(entity, classType)).build();
     }
@@ -124,7 +130,12 @@ public class ModelFront {
         Class<?> classType = findClassType(entityType);
 
         try {
-            Object entity = s.get(classType, id);
+            Object entity;
+            try {
+                entity = s.get(classType, id);
+            } catch (TypeMismatchException e) {
+                entity = s.get(classType, id.intValue());
+            }
             if (entity != null) {
                 final Gson g = getBuilder().create();
                 r = g.toJson(classType.cast(entity), classType);

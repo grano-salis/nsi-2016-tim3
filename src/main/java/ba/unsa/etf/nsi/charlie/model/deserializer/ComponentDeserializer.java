@@ -49,6 +49,7 @@ public class ComponentDeserializer implements JsonDeserializer<ComponentEntity> 
         ce.setUserid(userid);
         ce.setTitle(title);
 //        try {
+
 //            ce.setUpdated(HibernateHelper.getDateFormat().parse(updated));
 //        } catch (ParseException e) {
 //            throw new IllegalArgumentException(e);
