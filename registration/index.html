@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp" ng-controller = "RegisterController">
 
 <head>
     <meta charset="utf-8">
@@ -15,23 +15,35 @@
 
 <body><img class="img-responsive" src="../login/assets/img/first.jpg">
     <div class="login-dark">
-        <form method="post">
+        <form>
             <h2 class="s" style = "text-algin:center; margin-left:40px; margin-bottom:40px; color:#b0cef4;" >Registracija</h2>
             <div class="form-group">
-                <input class="form-control colors reg_textbox" type="text" name="name" placeholder="Ime" />
-                <input class="form-control colors reg_textbox" type="text" name="lastname" placeholder="Prezime" />
-                <input class="form-control colors reg_textbox" type="email" name="email" placeholder="Email" />
-            
-            
-                <input class="form-control colors reg_textbox" type="password" name="password" placeholder="Password">
-                <input class="form-control colors reg_textbox" type="password" name="potvrdiPassword" placeholder="Potvrdi password">
+                <input class="form-control colors reg_textbox" type="text" name="name" placeholder="Ime" ng-model="register.ime" />
+                <input class="form-control colors reg_textbox" type="text" name="lastname" placeholder="Prezime"
+                ng-model = "register.prezime" />
+                <input class="form-control colors reg_textbox" type="email" name="email" placeholder="Email"
+                ng-model= "register.email" />
+
+
+                <input class="form-control colors reg_textbox" type="password" name="password" placeholder="Password"
+                ng-model = "register.password">
+                <input class="form-control colors reg_textbox" type="password" name="potvrdiPassword" placeholder="Potvrdi password"
+                ng-model = "register.confirmPassword" >
             </div>
             <div class="form-group">
-                <button class="btn btn-primary btn-block" type="submit">Registruj se</button>
+                <button class="btn btn-primary btn-block" type="submit" ng-click="processForm()">Registruj se</button>
             </div></form>
+            <pre>
+                {{register}}
+           </pre>
     </div>
-    <script src="../login/assets/js/jquery.min.js"></script>
-    <script src="../login/assets/bootstrap/js/bootstrap.min.js"></script>
+    <div id = "ck"></div>
+    <script src="../login/assets/js/jquery.min.js?q=123"></script>
+    <script src="../login/assets/bootstrap/js/bootstrap.min.js?q=123"></script>
+    <script src="js/angular.min.js?q=123"></script>
+    <script src="js/angular-route.min.js?q=123"></script>
+    <script src="app/app.js?q=123"></script>
+    <script src="app/controllers/homeController.js?q=123"></script>
 </body>
 
 </html>
