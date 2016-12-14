@@ -4,7 +4,7 @@
     <facet type="hibernate" name="Hibernate">
       <configuration>
         <datasource-map>
-          <unit-entry name="hibernate.cfg.xml" value="bc8941f8-a3d6-43ce-a690-116a9ea40af7" />
+          <unit-entry name="hibernate.cfg.xml" value="44fb8803-6664-49f9-ac37-a0405d7878a4" />
         </datasource-map>
         <naming-strategy-map>
           <unit-entry name="hibernate.cfg.xml" />
@@ -41,5 +41,6 @@
     <orderEntry type="library" name="com.google.code.gson:gson:2.8.0" level="project" />
     <orderEntry type="library" name="xdb6" level="project" />
     <orderEntry type="library" name="org.hibernate:hibernate-c3p0:5.2.3.Final" level="project" />
+    <orderEntry type="library" name="Jersey-2.2" level="project" />
   </component>
 </module>

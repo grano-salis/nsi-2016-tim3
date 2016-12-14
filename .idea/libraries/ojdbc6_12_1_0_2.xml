@@ -1,10 +1,11 @@
 <component name="libraryTable">
   <library name="ojdbc6-12.1.0.2">
     <CLASSES>
-      <root url="file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Oracle/12.1.0.2" />
+      <root url="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/ojdbc6-12.1.0.2.jar!/" />
+      <root url="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/xdb6-12.1.0.2.jar!/" />
+      <root url="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/xmlparserv2.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
-    <jarDirectory url="file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Oracle/12.1.0.2" recursive="false" />
   </library>
 </component>
