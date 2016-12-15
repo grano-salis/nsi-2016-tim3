@@ -18,17 +18,18 @@
         <form>
             <h2 class="s" style = "text-algin:center; margin-left:40px; margin-bottom:40px; color:#b0cef4;" >Registracija</h2>
             <div class="form-group">
-                <input class="form-control colors reg_textbox" type="text" name="name" placeholder="Ime" ng-model="register.ime" />
+                <input class="form-control colors reg_textbox" type="text" name="name" placeholder="Ime"
+                ng-model = "register.registerModel.FirstName"/>
                 <input class="form-control colors reg_textbox" type="text" name="lastname" placeholder="Prezime"
-                ng-model = "register.prezime" />
+                ng-model = "register.registerModel.Lastname" />
                 <input class="form-control colors reg_textbox" type="email" name="email" placeholder="Email"
-                ng-model= "register.email" />
-
-
+                 ng-model = "register.registerModel.Email" />
+                <input class="form-control colors reg_textbox" type="text" name="username" placeholder="Username"
+                 ng-model = "register.registerModel.Username" />
                 <input class="form-control colors reg_textbox" type="password" name="password" placeholder="Password"
-                ng-model = "register.password">
+                ng-model = "register.registerModel.Password">
                 <input class="form-control colors reg_textbox" type="password" name="potvrdiPassword" placeholder="Potvrdi password"
-                ng-model = "register.confirmPassword" >
+                ng-model = "altModel.confirmPassword" >
             </div>
             <div class="form-group">
                 <button class="btn btn-primary btn-block" type="submit" ng-click="processForm()">Registruj se</button>
