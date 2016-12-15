@@ -39,7 +39,6 @@
     <orderEntry type="library" name="ojdbc6-12.1.0.2" level="project" />
     <orderEntry type="library" name="Jersey-2.2" level="project" />
     <orderEntry type="library" name="com.google.code.gson:gson:2.8.0" level="project" />
-    <orderEntry type="library" name="xdb6" level="project" />
     <orderEntry type="library" name="org.hibernate:hibernate-c3p0:5.2.3.Final" level="project" />
     <orderEntry type="library" name="Jersey-2.2" level="project" />
   </component>

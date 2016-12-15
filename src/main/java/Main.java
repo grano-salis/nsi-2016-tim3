@@ -1,13 +1,11 @@
-import ba.unsa.etf.nsi.charlie.*;
+import ba.unsa.etf.nsi.charlie.helpers.HibernateHelper;
 import ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity;
 import ba.unsa.etf.nsi.charlie.model.ComponentTypeEntity;
 import org.hibernate.*;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import javax.persistence.metamodel.EntityType;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by koljenovic on 12/12/2016.

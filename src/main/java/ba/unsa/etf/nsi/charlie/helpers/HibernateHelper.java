@@ -1,8 +1,9 @@
-package ba.unsa.etf.nsi.charlie;
+package ba.unsa.etf.nsi.charlie.helpers;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.TypeMismatchException;
 import org.hibernate.cfg.Configuration;
 import java.text.SimpleDateFormat;
 
@@ -36,4 +37,5 @@ public class HibernateHelper {
     public static Session getSession() throws HibernateException {
         return initFactory().openSession();
     }
+
 }

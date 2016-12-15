@@ -1,17 +1,14 @@
-package ba.unsa.etf.nsi.charlie.model.deserializer;
+package ba.unsa.etf.nsi.charlie.service.rest.deserializer;
 
-import ba.unsa.etf.nsi.charlie.HibernateHelper;
+import ba.unsa.etf.nsi.charlie.helpers.HibernateHelper;
 import ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity;
 import ba.unsa.etf.nsi.charlie.model.ComponentEntity;
 import ba.unsa.etf.nsi.charlie.model.ComponentTypeEntity;
 import ba.unsa.etf.nsi.charlie.model.UserEntity;
 import com.google.gson.*;
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.hibernate.Session;
 
 import java.lang.reflect.Type;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 

@@ -1,6 +1,7 @@
 package ba.unsa.etf.nsi.charlie.model;
 
 import javax.persistence.*;
+import javax.ws.rs.Path;
 import java.sql.Time;
 import java.util.Collection;
 import java.util.Date;

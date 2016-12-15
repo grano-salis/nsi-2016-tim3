@@ -1,4 +1,7 @@
-package ba.unsa.etf.nsi.charlie.rest;
+package ba.unsa.etf.nsi.charlie.service.rest;
+
+import ba.unsa.etf.nsi.charlie.service.rest.front.ModelFront;
+import ba.unsa.etf.nsi.charlie.service.rest.front.UserFront;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -12,7 +15,8 @@ public class RootProvider extends Application{
     @Override
     public Set<Class<?>> getClasses() {
         HashSet h = new HashSet<Class<?>>();
-        h.add( ModelFront.class );
+        h.add(ModelFront.class);
+        h.add(UserFront.class);
         return h;
     }
 }

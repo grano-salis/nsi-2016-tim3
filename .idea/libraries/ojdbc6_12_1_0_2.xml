@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="ojdbc6-12.1.0.2">
     <CLASSES>
-      <root url="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/ojdbc6-12.1.0.2.jar!/" />
-      <root url="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/xdb6-12.1.0.2.jar!/" />
-      <root url="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/xmlparserv2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xdb6-12.1.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/ojdbc6-12.1.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xmlparserv2.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

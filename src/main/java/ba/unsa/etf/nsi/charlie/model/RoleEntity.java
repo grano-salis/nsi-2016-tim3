@@ -12,6 +12,7 @@ public class RoleEntity {
     private long id;
     private String name;
     private transient Collection<UserRoleEntity> userrolesById;
+    private transient Collection<UserEntity> userByRoleId;
 
     @Id
     @Column(name = "ID", nullable = false, precision = 0)
@@ -61,4 +62,12 @@ public class RoleEntity {
     public void setUserrolesById(Collection<UserRoleEntity> userrolesById) {
         this.userrolesById = userrolesById;
     }
+
+    @Transient
+    public Collection<UserEntity> getUserByRoleId() { return userByRoleId; }
+
+    public void setUserByRoleId(Collection<UserEntity> userByRoleId) {
+        this.userByRoleId = userByRoleId;
+    }
+
 }

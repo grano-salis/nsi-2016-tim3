@@ -13,7 +13,6 @@
           <element id="library" level="project" name="Jersey-2.2" />
           <element id="library" level="project" name="ojdbc6-12.1.0.2" />
           <element id="library" level="project" name="org.hibernate:hibernate-c3p0:5.2.3.Final" />
-          <element id="library" level="project" name="xdb6" />
         </element>
       </element>
     </root>

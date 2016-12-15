@@ -1,6 +1,6 @@
-package ba.unsa.etf.nsi.charlie.model.deserializer;
+package ba.unsa.etf.nsi.charlie.service.rest.deserializer;
 
-import ba.unsa.etf.nsi.charlie.HibernateHelper;
+import ba.unsa.etf.nsi.charlie.helpers.HibernateHelper;
 import ba.unsa.etf.nsi.charlie.model.*;
 import com.google.gson.*;
 import org.hibernate.Session;

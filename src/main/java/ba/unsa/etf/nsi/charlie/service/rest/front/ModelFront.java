@@ -1,39 +1,22 @@
-package ba.unsa.etf.nsi.charlie.rest;
+package ba.unsa.etf.nsi.charlie.service.rest.front;
 
-import ba.unsa.etf.nsi.charlie.HibernateHelper;
+import ba.unsa.etf.nsi.charlie.helpers.HibernateHelper;
+import ba.unsa.etf.nsi.charlie.helpers.RestHelper;
 import ba.unsa.etf.nsi.charlie.model.*;
-import ba.unsa.etf.nsi.charlie.model.deserializer.*;
+import ba.unsa.etf.nsi.charlie.service.rest.deserializer.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import org.hibernate.Session;
-import org.hibernate.StaleStateException;
 import org.hibernate.Transaction;
 import org.hibernate.TypeMismatchException;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import ba.unsa.etf.nsi.charlie.helpers.GsonHelper;
 
 @Path("/rest")
 public class ModelFront {
-
-    private GsonBuilder gsonBuilder;
-
-    private GsonBuilder getBuilder() {
-        if (gsonBuilder == null) {
-            gsonBuilder = new GsonBuilder();
-            gsonBuilder.setPrettyPrinting();
-            gsonBuilder.serializeNulls();
-            gsonBuilder.setDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
-            gsonBuilder.registerTypeAdapter(ComponentEntity.class, new ComponentDeserializer());
-            gsonBuilder.registerTypeAdapter(ComponentDraftEntity.class, new ComponentDraftDeserializer());
-            gsonBuilder.registerTypeAdapter(ComponentTypeEntity.class, new ComponentTypeDeserializer());
-            gsonBuilder.registerTypeAdapter(LogEntity.class, new LogDeserializer());
-        }
-        return gsonBuilder;
-    }
 
     protected Class<?> findClassType(final String entityType) {
         try {
@@ -76,12 +59,13 @@ public class ModelFront {
         String r = "{}";
         Class<?> classType = findClassType(entityType);
 
-        final Gson g = getBuilder().create();
+        final Gson g = GsonHelper.getBuilder().create();
         Object entity = g.fromJson(jsonData, classType);
         s.saveOrUpdate(classType.cast(entity));
         try {
             t.commit();
         } catch (Exception e) {
+            s.close();
             return Response.status(404).entity(r).build();
         }
         s.close();
@@ -95,27 +79,8 @@ public class ModelFront {
             @PathParam("entityType") String entityType,
             @PathParam("id") Long id)
     {
-        Session s = HibernateHelper.getSession();
-        String r = "{}";
         Class<?> classType = findClassType(entityType);
-
-        try {
-            Object entity;
-            try {
-                entity = s.get(classType, id);
-            } catch (TypeMismatchException e) {
-                entity = s.get(classType, id.intValue());
-            }
-            if (entity != null) {
-                final Gson g = getBuilder().create();
-                r = g.toJson(classType.cast(entity), classType);
-            }
-        } catch (Throwable e) {
-            throw new ExceptionInInitializerError(e);
-        } finally {
-            s.close();
-        }
-        return Response.status(200).entity(r).build();
+        return Response.status(200).entity(RestHelper.entityToJson(classType, id)).build();
     }
 
     @DELETE
@@ -130,20 +95,24 @@ public class ModelFront {
         Class<?> classType = findClassType(entityType);
 
         try {
-            Object entity;
+            Object entity = null;
             try {
                 entity = s.get(classType, id);
             } catch (TypeMismatchException e) {
                 entity = s.get(classType, id.intValue());
+            } catch (Exception e) {
+                s.close();
+                e.printStackTrace();
             }
             if (entity != null) {
-                final Gson g = getBuilder().create();
+                final Gson g = GsonHelper.getBuilder().create();
                 r = g.toJson(classType.cast(entity), classType);
                 Transaction t = s.beginTransaction();
                 s.delete(classType.cast(entity));
                 t.commit();
             }
         } catch (Throwable e) {
+            s.close();
             throw new ExceptionInInitializerError(e);
         } finally {
             s.close();
