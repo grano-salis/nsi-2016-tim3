@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="loginApp" ng-controller = "LoginController">
 
 <head>
     <meta charset="utf-8">
@@ -15,21 +15,31 @@
 
 <body><img class="img-responsive" src="assets/img/first.jpg">
     <div class="login-dark">
-        <form method="post">
-            <h2 class="s" style = "text-algin:center; margin-left:50px; color:#b0cef4;" >Wellcome</h2>
+        <form>
+            <h2 class="s" style = "text-algin:center; margin-left:50px; color:#b0cef4;" >Dobrodošli</h2>
             <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
             <div class="form-group">
-                <input class="form-control colors" type="email" name="email" placeholder="Email" />
+                <input class="form-control colors" type="text" name="username" placeholder="Username"
+                 ng-model="login.loginModel.Username" />
             </div>
             <div class="form-group">
-                <input class="form-control" type="password" name="password" placeholder="Password">
+                <input class="form-control" type="password" name="password" placeholder="Password"
+                 ng-model="login.loginModel.Password">
             </div>
             <div class="form-group">
-                <button class="btn btn-primary btn-block" type="submit">Log In</button>
+                <button class="btn btn-primary btn-block" type="submit" ng-click="processForm()">Log In</button>
             </div><a href="#" class="forgot">Forgot your email or password?</a></form>
+            <pre>
+                {{login}}
+           </pre>
     </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.min.js?q=123"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js?q=123"></script>
+    <script src="js/angular.min.js?q=123"></script>
+    <script src="js/angular-route.min.js?q=123"></script>
+    <script src="app/loginApp.js?q=123"></script>
+    <script src="app/Controllers/loginController.js?q=123"></script>
+    <script src="cookies/angular-cookies.js?q=123"></script>
 </body>
 
 </html>
