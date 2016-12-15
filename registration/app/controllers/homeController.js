@@ -20,9 +20,9 @@ function procesirajRegistraciju($scope, $http){
         data    : $scope.register,
         headers : { 'Content-Type': 'application/json' }
       }).then(function successCallback(response) {
-           console.log("naisuu");
+           console.log("proslo");
       }, function errorCallback(response) {
-           console.log("wtf");
+           console.log("nije proslo");
       });
     };
 }
