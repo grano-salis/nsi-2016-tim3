@@ -1,0 +1,55 @@
+
+<dt class="label"></dt>
+{{#emptyObjects "2" 0=SkillsPassport.CoverLetter.Letter.Localisation 1=SkillsPassport.CoverLetter.Letter.SubjectLine}}
+{{else}}
+	{{#call_partial . path="" section="CoverLetter.Letter.SubjectLine SkillsPassport.CoverLetter.Letter.Localisation"  view="CL:SubjectLineLocalisation" name="CL:SubjectLineLocalisation" form="SubjectLineLocalisation" }}
+		{{> templates/menu/itemmenu}}
+	{{/call_partial}}
+{{/emptyObjects}}
+<dd>
+		
+			
+<div class="value Localisation
+		left-align
+		
+		
+">
+<span {{#unless SkillsPassport.CoverLetter.Letter.Localisation}}class="default-value"{{/unless}}>
+
+	{{#unless SkillsPassport.CoverLetter.Letter.Localisation}}
+		City, Date
+	{{else}}
+		{{#if SkillsPassport.CoverLetter.Letter.Localisation.Place.Municipality}}
+			{{SkillsPassport.CoverLetter.Letter.Localisation.Place.Municipality}}
+				{{#if SkillsPassport.CoverLetter.Letter.Localisation.Date}}
+					{{#format_date SkillsPassport.CoverLetter.Letter.Localisation.Date ../Preferences.CoverLetter.Letter.Localisation.Date DocumentType="ECL"}}, {{.}}{{/format_date}}
+			{{/if}}
+		{{else}}
+			{{#format_date SkillsPassport.CoverLetter.Letter.Localisation.Date ../Preferences.CoverLetter.Letter.Localisation.Date DocumentType="ECL"}}{{.}}{{/format_date}}
+		{{/if}}
+	{{/unless}}
+</span>
+</div>
+			
+			
+<div class="value SubjectLine rich-content">
+<span {{#unless SkillsPassport.CoverLetter.Letter.SubjectLine}}class="default-value"{{/unless}}>
+{{#if SkillsPassport.CoverLetter.Letter.SubjectLine}}
+	{{#format_CLSubject SkillsPassport.CoverLetter.Letter.SubjectLine}}{{.}}{{/format_CLSubject}}
+{{else}}
+	Subject
+{{/if}}
+</span>
+</div>
+			
+		
+	
+
+{{#emptyObjects "2" 0=SkillsPassport.CoverLetter.Letter.Localisation 1=SkillsPassport.CoverLetter.Letter.SubjectLine}}
+<div class="empty add">
+	<span class="empty add">
+		Fill in
+	</span>
+</div>
+{{/emptyObjects}}
+</dd>	

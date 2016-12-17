@@ -1,0 +1,1 @@
+define({"publications":"Izdanja","presentations":"Prezentacije","projects":"Projekti","conferences":"Konferencije","seminars":"Seminari","honors_awards":"Priznanja i nagrade","memberships":"Članstva","references":"Preporuke","citations":"Citati","courses":"Tečajevi","certifications":"Certifikati"});

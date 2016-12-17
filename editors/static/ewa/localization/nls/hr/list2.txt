@@ -1,0 +1,15 @@
+https://europass.cedefop.europa.eu/editors/static/ewa/localization/nls/hr/AchievementType.js
+https://europass.cedefop.europa.eu/editors/static/ewa/localization/nls/hr/BusinessSector.js
+https://europass.cedefop.europa.eu/editors/static/ewa/localization/nls/hr/ClosingSalutation.js
+https://europass.cedefop.europa.eu/editors/static/ewa/localization/nls/hr/Country.js
+https://europass.cedefop.europa.eu/editors/static/ewa/localization/nls/hr/EducationalField.js
+https://europass.cedefop.europa.eu/editors/static/ewa/localization/nls/hr/EducationalLevel.js
+https://europass.cedefop.europa.eu/editors/static/ewa/localization/nls/hr/EnclosedLabel.js
+https://europass.cedefop.europa.eu/editors/static/ewa/localization/nls/hr/GenderOption.js
+https://europass.cedefop.europa.eu/editors/static/ewa/localization/nls/hr/InstantMessagingType.js
+https://europass.cedefop.europa.eu/editors/static/ewa/localization/nls/hr/Language.js
+https://europass.cedefop.europa.eu/editors/static/ewa/localization/nls/hr/LinguisticExperienceType.js
+https://europass.cedefop.europa.eu/editors/static/ewa/localization/nls/hr/MotherLanguage.js
+https://europass.cedefop.europa.eu/editors/static/ewa/localization/nls/hr/Nationality.js
+https://europass.cedefop.europa.eu/editors/static/ewa/localization/nls/hr/OccupationalField.js
+https://europass.cedefop.europa.eu/editors/static/ewa/localization/nls/hr/OpeningSalutation.js

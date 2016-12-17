@@ -1,0 +1,1 @@
+define({"home":"Kućni","work":"Poslovni","mobile":"Broj mobilnog telefona"});

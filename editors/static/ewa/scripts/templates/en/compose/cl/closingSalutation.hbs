@@ -1,0 +1,26 @@
+
+<dt class="label"></dt>
+{{#emptyObjects "2" 0=SkillsPassport.CoverLetter.Letter.ClosingSalutation 1=SkillsPassport.LearnerInfo.Identification.Signature}}
+{{else}}
+	{{#call_partial . path="" view="CL:ClosingSalutation" section="CoverLetter.Letter.ClosingSalutation SkillsPassport.LearnerInfo.Identification.Signature" name="CL:ClosingSalutation" form="CL:ClosingSalutation"}}
+		{{> templates/menu/itemmenu}}
+	{{/call_partial}}{{/emptyObjects}}
+<dd {{#if Preferences.CoverLetter.Justification.justify}}style="text-align: justify !important;"{{/if}}>
+	<div class="value ClosingSalutation">
+	{{#if SkillsPassport.CoverLetter.Letter.ClosingSalutation}}
+		<span>{{SkillsPassport.CoverLetter.Letter.ClosingSalutation.Label}},</span>
+	{{else}}
+		<span class="default-value">Closing salutation</span>
+	{{/if}}
+	</div>
+
+	{{> templates/compose/cl/signature}}
+
+	{{> templates/compose/personname}}
+
+	{{#emptyObjects "2" 0=SkillsPassport.CoverLetter.Letter.ClosingSalutation 1=SkillsPassport.LearnerInfo.Identification.Signature}}
+	<div class="empty add">
+		<span class="empty add">Fill in</span>
+	</div>
+	{{/emptyObjects}}
+</dd>

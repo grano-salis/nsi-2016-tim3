@@ -1,0 +1,1 @@
+define({"numeric/medium":"31/1/2005","text/long/texts":"31.1.2005.","text/long":"31. siječnja 2005.","text/long/suffix":null,"numeric/short":"31/1/05","text/short":"31. siječnja 05.","numeric/long":"31/01/2005","format":"Date format"});

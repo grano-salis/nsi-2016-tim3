@@ -1,0 +1,1 @@
+define({"studying_training_language":"Upotreba jezika tijekom studija ili usavršavanja","work_language":"Upotreba jezika na poslu","living_traveling_language":"Upotreba jezika tijekom boravka ili putovanja u inozemstvu","mediating_groups_language":"Posredovanje među jezicima"});

@@ -1,0 +1,67 @@
+
+
+<fieldset>
+	<header>
+		<legend>LIST OF ATTACHMENTS</legend>
+	</header>
+
+{{#with SkillsPassport}}
+
+	<fieldset>
+		<input type="text" 
+				class="formfield help enclosed with-placeholder"
+				title="{{get_text "CoverLetter.Documentation.Heading.Label" group="AccessibilityLabel"}}"
+				name="CoverLetter.Documentation.Heading.Label"
+				data-help-key="CoverLetter.Enclosed.Text.Label"
+				value="{{#if CoverLetter.Documentation.Heading}}{{CoverLetter.Documentation.Heading.Label}}{{else}}Enclosed:{{/if}}">
+				
+		<span name="CoverLetter.Documentation.Heading.Label" class="help placeholder" style="display:none;">
+			Enclosed:
+		</span>
+	</fieldset>
+		
+	
+	
+	<fieldset class="other-europass-documents">
+		{{#unless ../excludeAll}}
+		<label for="Title">Europass documents:</label>
+		{{/unless}}
+		<ul class="europass-documents">
+			{{#loop_europass_documents CoverLetter.Documentation.InterDocument ../Extra }}
+			<li class="clickable-area europass-document-{{loopValue}} {{#if_eq checked compare="checked"}}selected{{/if_eq}}"
+				data-tip.position="left">
+				<input type="checkbox" 
+						class="europass-document parent-selectable clickable-area-input css-checkbox"
+						title="{{get_text "CoverLetter.Documentation.InterDocument" group="AccessibilityLabel"}}"
+						name="CoverLetter.Documentation.InterDocument[{{loopId}}].ref"
+						value="{{loopValue}}"
+						{{#if_eq checked compare="checked"}}checked="checked"{{/if_eq}}
+						id="europass-document-{{loopId}}"/>
+				<label for="{{loopValue}}" class="{{loopValue}} css-label">{{loopLabel}}</label>
+			</li>
+			{{/loop_europass_documents}}
+			</ul>
+	</fieldset>
+
+	<fieldset class="external-attachments">
+	  <label for="Title">Other documents:</label>
+		<div class="single multipliable compound">
+		{{#each_with_default CoverLetter.Documentation.ExtraDocument item="{ \"Description\" : \"\" }" }}
+		<div class="composite" data-index="{{index}}">
+			<input type="text" 
+					class="formfield single help copy with-placeholder"
+					title="{{get_text "CoverLetter.Documentation.ExtraDocument.Description" group="AccessibilityLabel"}}"
+					name="CoverLetter.Documentation.ExtraDocument[{{index}}].Description"
+					data-help-key="CoverLetter.Documentation.ExtraDocument.Description"
+					value="{{Description}}">
+			 <span name="CoverLetter.Documentation.ExtraDocument[{{index}}].Description" class="help placeholder" style="display:none;">
+					Certificate of employment
+			</span>
+		</div>
+		{{/each_with_default}}
+		</div>
+	</fieldset>
+	
+	{{/with}}
+	
+</fieldset>

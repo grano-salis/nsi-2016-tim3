@@ -1,0 +1,1 @@
+define({"reject.link.add":"Otkažite","superScript":"Eksponent","subScript":"Indeks "});

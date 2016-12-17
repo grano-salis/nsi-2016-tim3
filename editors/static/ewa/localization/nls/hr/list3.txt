@@ -1,0 +1,4 @@
+https://europass.cedefop.europa.eu/editors/static/ewa/localization/nls/hr/PersonNameOrder.js
+https://europass.cedefop.europa.eu/editors/static/ewa/localization/nls/hr/PersonalDataTreatment.js
+https://europass.cedefop.europa.eu/editors/static/ewa/localization/nls/hr/Title.js
+https://europass.cedefop.europa.eu/editors/static/ewa/localization/nls/hr/ValidationErrorMessages.js

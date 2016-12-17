@@ -1,0 +1,1 @@
+define({"A1":"Temeljni korisnik","A2":"Temeljni korisnik","B1":"Samostalni korisnik","B2":"Samostalni korisnik","C1":"Iskusni korisnik","C2":"Iskusni korisnik"});

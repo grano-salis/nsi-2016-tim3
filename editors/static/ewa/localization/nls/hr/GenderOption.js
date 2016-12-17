@@ -1,0 +1,1 @@
+define({"LearnerInfo.Identification.Demographics.Gender.M":"Muško","LearnerInfo.Identification.Demographics.Gender.F":"Žensko","LearnerInfo.Identification.Demographics.Gender.NA":"Nemojte navesti"});

@@ -1,0 +1,1 @@
+define({"job_applied_for":"RADNO MJESTO NA KOJE SE PRIJAVLJUJETE","position":"ZVANJE","preferred_job":"ŽELJENO RADNO MJESTO","studies_applied_for":"STUDIJ NA KOJI SE PRIJAVLJUJETE","personal_statement":"PERSONAL STATEMENT"});
