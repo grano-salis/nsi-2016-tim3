@@ -10,10 +10,13 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.TypeMismatchException;
 
+import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import ba.unsa.etf.nsi.charlie.helpers.GsonHelper;
+
+import java.util.List;
 
 @Path("/rest")
 public class ModelFront {
@@ -70,6 +73,26 @@ public class ModelFront {
         }
         s.close();
         return Response.status(200).entity(g.toJson(entity, classType)).build();
+    }
+
+    @GET
+    @Path("users")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response readCollection(
+//            @PathParam("entityType") String entityType,
+            String jsonData)
+    {
+        Session s = HibernateHelper.getSession();
+        String r = "{}";
+//        Class<?> classType = findClassType(entityType);
+
+        final Gson g = GsonHelper.getBuilder().create();
+        Query q = s.createQuery("from UserEntity");
+
+        List<UserEntity> c = q.getResultList();
+
+        s.close();
+        return Response.status(200).entity(g.toJson(c)).build();
     }
 
     @GET
