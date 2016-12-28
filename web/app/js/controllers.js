@@ -20,3 +20,17 @@ app.controller('ComponentCtrl', ['$scope', 'ComponentFactory', function ($scope,
     })
 }]);
 
+mainApp.controller('ManagerPanelController', function($scope, $http) {
+    $http({
+        method: 'GET',
+        url: 'http://do.mac.ba:8080/charlie/rest/users/'
+    }).then(function successCallback(response) {
+        // this callback will be called asynchronously
+        // when the response is available
+        $scope.users = response.json;
+    }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+    });
+});
+
