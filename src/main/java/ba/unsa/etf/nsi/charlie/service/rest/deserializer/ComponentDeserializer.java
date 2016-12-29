@@ -26,7 +26,7 @@ public class ComponentDeserializer implements JsonDeserializer<ComponentEntity> 
         final String title;
         final String updated;
         final String additionalinfo;
-        final Integer componenttype;
+        final Long componenttype;
         final String data;
 
         try {
@@ -35,7 +35,7 @@ public class ComponentDeserializer implements JsonDeserializer<ComponentEntity> 
             title = jsonObject.get("title").getAsString();
 //            updated = jsonObject.get("updated").getAsString();
             additionalinfo = jsonObject.get("additionalinfo").getAsString();
-            componenttype = jsonObject.get("componenttype").getAsInt();
+            componenttype = jsonObject.get("componenttype").getAsLong();
             data = jsonObject.get("data").getAsString();
         } catch (NullPointerException e) {
             throw new IllegalArgumentException(e);

@@ -13,10 +13,15 @@ public class ComponentDraftEntity {
     private String status;
     private String additionalinfo;
     private Long userid;
-    private Integer componenttype;
+    private Long componenttype;
+
+    public void setComponenttype(Long componenttype) {
+        this.componenttype = componenttype;
+    }
+
     private String data;
     private transient ComponentEntity componentByComponentid;
-    private transient UserEntity userByUserid;
+//    private transient UserEntity userByUserid;
     private transient ComponentTypeEntity componenttypeByComponenttype;
 
     @Id
@@ -71,12 +76,8 @@ public class ComponentDraftEntity {
 
     @Basic
     @Column(name = "COMPONENTTYPE", nullable = true, precision = 0)
-    public int getComponenttype() {
+    public long getComponenttype() {
         return componenttype;
-    }
-
-    public void setComponenttype(int componenttype) {
-        this.componenttype = componenttype;
     }
 
     @Basic
@@ -131,15 +132,15 @@ public class ComponentDraftEntity {
         this.componentByComponentid = componentByComponentid;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "USERID", referencedColumnName = "ID")
-    public UserEntity getUserByUserid() {
-        return userByUserid;
-    }
+//    @ManyToOne
+//    @JoinColumn(name = "USERID", referencedColumnName = "ID")
+//    public UserEntity getUserByUserid() {
+//        return userByUserid;
+//    }
 
-    public void setUserByUserid(UserEntity userByUserid) {
-        this.userByUserid = userByUserid;
-    }
+//    public void setUserByUserid(UserEntity userByUserid) {
+//        this.userByUserid = userByUserid;
+//    }
 
     @ManyToOne
     @JoinColumn(name = "COMPONENTTYPE", referencedColumnName = "ID")

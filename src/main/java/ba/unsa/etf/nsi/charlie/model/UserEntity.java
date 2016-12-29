@@ -15,7 +15,7 @@ public class UserEntity {
     private String emailconfirmed;
     private String passwordhash;
     private transient Collection<ComponentEntity> componentsById;
-    private transient Collection<ComponentDraftEntity> componentdraftsById;
+//    private transient Collection<ComponentDraftEntity> componentdraftsById;
     private transient Collection<LogEntity> logsById;
     private transient UserInfoEntity userinfoById;
     private transient Collection<UserRoleEntity> userrolesById;
@@ -106,14 +106,14 @@ public class UserEntity {
         this.componentsById = componentsById;
     }
 
-    @OneToMany(mappedBy = "userByUserid")
-    public Collection<ComponentDraftEntity> getComponentdraftsById() {
-        return componentdraftsById;
-    }
+//    @OneToMany(mappedBy = "userByUserid")
+//    public Collection<ComponentDraftEntity> getComponentdraftsById() {
+//        return componentdraftsById;
+//    }
 
-    public void setComponentdraftsById(Collection<ComponentDraftEntity> componentdraftsById) {
-        this.componentdraftsById = componentdraftsById;
-    }
+//    public void setComponentdraftsById(Collection<ComponentDraftEntity> componentdraftsById) {
+//        this.componentdraftsById = componentdraftsById;
+//    }
 
     @OneToMany(mappedBy = "userByUserId")
     public Collection<LogEntity> getLogsById() {

@@ -72,7 +72,9 @@ public class ModelFront {
             return Response.status(404).entity(r).build();
         }
         s.close();
-        return Response.status(200).entity(g.toJson(entity, classType)).build();
+        return Response.status(200)
+                .entity(g.toJson(entity, classType))
+                .build();
     }
 
     @GET

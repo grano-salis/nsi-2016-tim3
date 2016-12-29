@@ -13,11 +13,21 @@ import java.util.Date;
 @Table(name = "COMPONENT", schema = "NSI03", catalog = "")
 public class ComponentEntity {
     private long id;
-    private long userid;
+    private Long userid;
     private String title;
     private Date updated;
+
+    public void setUpdated(Time updated) {
+        this.updated = updated;
+    }
+
     private String additionalinfo;
-    private Integer componenttype;
+    private Long componenttype;
+
+    public void setComponenttype(Long componenttype) {
+        this.componenttype = componenttype;
+    }
+
     private String data;
     private transient UserEntity userByUserid;
     private transient ComponentTypeEntity componenttypeByComponenttype;
@@ -75,12 +85,8 @@ public class ComponentEntity {
 
     @Basic
     @Column(name = "COMPONENTTYPE", nullable = true, precision = 0)
-    public Integer getComponenttype() {
+    public Long getComponenttype() {
         return componenttype;
-    }
-
-    public void setComponenttype(Integer componenttype) {
-        this.componenttype = componenttype;
     }
 
     @Basic

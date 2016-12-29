@@ -22,7 +22,7 @@ public class ComponentDraftDeserializer implements JsonDeserializer<ComponentDra
         final String status;
         final String additionalinfo;
         final long userid;
-        final int componenttype;
+        final long componenttype;
         final String data;
 
         try {
@@ -48,7 +48,7 @@ public class ComponentDraftDeserializer implements JsonDeserializer<ComponentDra
 
         Session s = HibernateHelper.getSession();
         entity.setComponentByComponentid(s.get(ComponentEntity.class, componentid));
-        entity.setUserByUserid(s.get(UserEntity.class, userid));
+//        entity.setUserByUserid(s.get(UserEntity.class, userid));
         entity.setComponenttypeByComponenttype(s.get(ComponentTypeEntity.class, componenttype));
 
         s.close();

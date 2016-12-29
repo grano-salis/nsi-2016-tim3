@@ -9,14 +9,19 @@ import java.util.Collection;
 @Entity
 @Table(name = "COMPONENTTYPE", schema = "NSI03", catalog = "")
 public class ComponentTypeEntity {
-    private int id;
+    private long id;
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     private String componenttype;
     private transient Collection<ComponentEntity> componentsById;
     private transient Collection<ComponentDraftEntity> componentdraftsById;
 
     @Id
     @Column(name = "ID", nullable = false, precision = 0)
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -50,7 +55,7 @@ public class ComponentTypeEntity {
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (componenttype != null ? componenttype.hashCode() : 0);
         return result;
     }

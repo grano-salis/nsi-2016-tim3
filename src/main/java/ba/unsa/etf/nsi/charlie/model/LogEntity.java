@@ -10,15 +10,30 @@ import java.util.Date;
 @Entity
 @Table(name = "LOG", schema = "NSI03", catalog = "")
 public class LogEntity {
-    private int id;
+    private long id;
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     private Long userId;
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
     private String logText;
     private Date created;
+
+    public void setCreated(Time created) {
+        this.created = created;
+    }
+
     private transient UserEntity userByUserId;
 
     @Id
     @Column(name = "ID", nullable = false, precision = 0)
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -73,7 +88,7 @@ public class LogEntity {
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = (int) (id ^ (id >>> 32));
         result = 31 * result + userId.intValue();
         result = 31 * result + (logText != null ? logText.hashCode() : 0);
         result = 31 * result + (created != null ? created.hashCode() : 0);
