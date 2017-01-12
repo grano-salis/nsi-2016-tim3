@@ -1,6 +1,6 @@
 import ba.unsa.etf.nsi.charlie.helpers.HibernateHelper;
-import ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity;
-import ba.unsa.etf.nsi.charlie.model.ComponentTypeEntity;
+import ba.unsa.etf.nsi.charlie.modelx.ComponentDraftEntity;
+import ba.unsa.etf.nsi.charlie.modelx.ComponentTypeEntity;
 import org.hibernate.*;
 import org.hibernate.query.Query;
 import javax.persistence.metamodel.EntityType;

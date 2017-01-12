@@ -31,7 +31,7 @@ public class ComponentDraftDeserializer implements JsonDeserializer<ComponentDra
             status = jsonObject.get("status").getAsString();
             additionalinfo = jsonObject.get("additionalinfo").getAsString();
             userid = jsonObject.get("userid").getAsLong();
-            componenttype = jsonObject.get("componenttype").getAsInt();
+            componenttype = jsonObject.get("componenttype").getAsLong();
             data = jsonObject.get("data").getAsString();
         } catch (NullPointerException e) {
             throw new IllegalArgumentException(e);
@@ -46,12 +46,6 @@ public class ComponentDraftDeserializer implements JsonDeserializer<ComponentDra
         entity.setComponenttype(componenttype);
         entity.setData(data);
 
-        Session s = HibernateHelper.getSession();
-        entity.setComponentByComponentid(s.get(ComponentEntity.class, componentid));
-//        entity.setUserByUserid(s.get(UserEntity.class, userid));
-        entity.setComponenttypeByComponenttype(s.get(ComponentTypeEntity.class, componenttype));
-
-        s.close();
         return entity;
     }
 }

@@ -1,0 +1,70 @@
+<div class="container">
+    <nav class="nav navbar-default">
+        <div class="container-fluid">
+            <div id="logotip" class="navbar-header">
+                <img alt="Brand" src="/adnin/img/Logomakr.png">
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#">CV Editor</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        {{ user.FirstName }} <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">CV Directory</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a ng-href="#here" ng-click="logout()">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <br><br><br>
+    <h2 style="color:#ff6a2b;text-align:center">CV Directory</h2>
+    <hr style="height: 30px;border-style: solid;border-color: #54abdd;border-width:1px 0 0 0;border-radius: 20px;">
+
+    <form class="navbar-form navbar-left" role="search" style="margin-left:78.2%">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-link"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+    </form>
+    <!-- Table -->
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="draft in drafts | filter:{status: 'PENDING'}:true">
+                <div ng-repeat="user in users | filter:{UserId: draft.userid}:true">
+                    <td style="line-height:50px">{{ draft.id }} {{ user.FirstName }} {{ user.LastName }}</td>
+                    <td style="line-height:50px">{{ user.Email }}</td>
+                    <td style="line-height:50px"><a data-id="{{draft.id}}" type="button" ng-click="download($event)" class="btn btn-default" formtarget="_blank">Preview</button></td>
+                    <td style="line-height:50px">
+                        <button type="submit" data-id="{{draft.id}}" ng-click="approve($event)" class="btn btn-success">Approve</button>
+                    </td>
+                </div>
+            </tr>
+        </tbody>
+    </table>
+
+    <nav aria-label="...">
+        <ul class="pager">
+            <li><a href="#">Previous</a></li>
+            <li><a href="#">Next</a></li>
+        </ul>
+    </nav>
+
+    <hr style="height: 30px;border-style: solid;border-color: #54abdd;border-width:0 0 1px 0;border-radius: 20px;">
+
+</div>

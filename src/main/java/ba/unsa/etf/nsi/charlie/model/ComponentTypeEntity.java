@@ -4,28 +4,24 @@ import javax.persistence.*;
 import java.util.Collection;
 
 /**
- * Created by koljenovic on 12/12/2016.
+ * Created by koljenovic on 10/01/2017.
  */
 @Entity
 @Table(name = "COMPONENTTYPE", schema = "NSI03", catalog = "")
 public class ComponentTypeEntity {
     private long id;
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
     private String componenttype;
-    private transient Collection<ComponentEntity> componentsById;
-    private transient Collection<ComponentDraftEntity> componentdraftsById;
+    private Collection<ComponentEntity> componentsById;
 
     @Id
     @Column(name = "ID", nullable = false, precision = 0)
+    @SequenceGenerator(name = "sequence", allocationSize = 20, sequenceName = "SEQ_COMPONENTYPE")
+    @GeneratedValue(generator = "sequence", strategy = GenerationType.SEQUENCE)
     public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -60,21 +56,12 @@ public class ComponentTypeEntity {
         return result;
     }
 
-    @OneToMany(mappedBy = "componenttypeByComponenttype")
+    @OneToMany(mappedBy = "componentTypeByComponentType")
     public Collection<ComponentEntity> getComponentsById() {
         return componentsById;
     }
 
     public void setComponentsById(Collection<ComponentEntity> componentsById) {
         this.componentsById = componentsById;
-    }
-
-    @OneToMany(mappedBy = "componenttypeByComponenttype")
-    public Collection<ComponentDraftEntity> getComponentdraftsById() {
-        return componentdraftsById;
-    }
-
-    public void setComponentdraftsById(Collection<ComponentDraftEntity> componentdraftsById) {
-        this.componentdraftsById = componentdraftsById;
     }
 }

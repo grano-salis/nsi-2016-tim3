@@ -38,7 +38,6 @@ public class LogDeserializer implements JsonDeserializer<LogEntity> {
         entity.setCreated(new Date());
 
         Session s = HibernateHelper.getSession();
-        entity.setUserByUserId(s.get(UserEntity.class, userId));
 
         s.close();
         return entity;

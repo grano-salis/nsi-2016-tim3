@@ -15,15 +15,10 @@
         <property name="hibernate.c3p0.max_statements">50</property>
         <property name="hibernate.c3p0.idle_test_period">3000</property>
 
-        <mapping resource="mappings.xml"/>
         <mapping class="ba.unsa.etf.nsi.charlie.model.ComponentEntity"/>
         <mapping class="ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity"/>
         <mapping class="ba.unsa.etf.nsi.charlie.model.ComponentTypeEntity"/>
         <mapping class="ba.unsa.etf.nsi.charlie.model.LogEntity"/>
-        <mapping class="ba.unsa.etf.nsi.charlie.model.RoleEntity"/>
-        <mapping class="ba.unsa.etf.nsi.charlie.model.UserInfoEntity"/>
-        <mapping class="ba.unsa.etf.nsi.charlie.model.UserRoleEntity"/>
-        <mapping class="ba.unsa.etf.nsi.charlie.model.UserEntity"/>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->

@@ -4,479 +4,479 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="ba.unsa.etf.nsi.charlie.model.ComponentEntity" table="COMPONENT" schema="NSI03">
-        <id name="id" >
-            <column name="ID" sql-type="number(*)" precision="2147483646"/>
-            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">
-                <param name="prefer_sequence_per_entity">true</param>
-                <param name="optimizer">none</param>
-                <param name="increment_size">1</param>
-                <param name="sequence_name">SEQ_COMPONENT</param>
-            </generator>
-        </id>
-        <property name="userid" insert="false" update="false">
-            <column name="USERID" sql-type="number(*)" precision="2147483646" not-null="true"/>
-        </property>
-        <property name="title">
-            <column name="TITLE" sql-type="nvarchar2(50)" length="50"/>
-        </property>
-        <property name="updated">
-            <column name="UPDATED" sql-type="date"/>
-        </property>
-        <property name="additionalinfo">
-            <column name="ADDITIONALINFO" sql-type="nclob"/>
-        </property>
-        <property name="componenttype" insert="false" update="false">
-            <column name="COMPONENTTYPE" sql-type="number(*)" precision="2147483646"/>
-        </property>
-        <property name="data">
-            <column name="DATA" sql-type="public.xmltype"/>
-        </property>
-        <many-to-one name="userByUserid" class="ba.unsa.etf.nsi.charlie.model.UserEntity">
-            <column name="USERID"/>
-        </many-to-one>
-        <many-to-one name="componenttypeByComponenttype" class="ba.unsa.etf.nsi.charlie.model.ComponentTypeEntity">
-            <column name="COMPONENTTYPE"/>
-        </many-to-one>
-        <set name="componentdraftsById" inverse="true">
-            <key>
-                <column name="COMPONENTID"/>
-            </key>
-            <one-to-many not-found="ignore" class="ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity"/>
-        </set>
-    </class>
-    <class name="ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity" table="COMPONENTDRAFT" schema="NSI03">
-        <id name="id">
-            <column name="ID" sql-type="number(*)" precision="2147483646" not-null="true"/>
-            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">
-                <param name="prefer_sequence_per_entity">true</param>
-                <param name="optimizer">none</param>
-                <param name="increment_size">1</param>
-                <param name="sequence_name">SEQ_COMPONENTDRAFT</param>
-            </generator>
-        </id>
-        <property name="componentid" insert="false" update="false">
-            <column name="COMPONENTID" sql-type="number(*)" precision="2147483646"/>
-        </property>
-        <property name="status">
-            <column name="STATUS" sql-type="varchar2(100)" length="100"/>
-        </property>
-        <property name="additionalinfo">
-            <column name="ADDITIONALINFO" sql-type="varchar2(100)" length="100"/>
-        </property>
-        <property name="userid" insert="false" update="false">
-            <column name="USERID" sql-type="number(*)" precision="2147483646"/>
-        </property>
-        <property name="componenttype" insert="false" update="false">
-            <column name="COMPONENTTYPE" sql-type="number(*)" precision="2147483646"/>
-        </property>
-        <property name="data">
-            <column name="DATA" sql-type="public.xmltype"/>
-        </property>
-        <many-to-one name="componentByComponentid" class="ba.unsa.etf.nsi.charlie.model.ComponentEntity">
-            <column name="COMPONENTID"/>
-        </many-to-one>
+    <!--<class name="ba.unsa.etf.nsi.charlie.model.ComponentEntity" table="COMPONENT" schema="NSI03">-->
+        <!--<id name="id" >-->
+            <!--<column name="ID" sql-type="number(*)" precision="2147483646"/>-->
+            <!--<generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">-->
+                <!--<param name="prefer_sequence_per_entity">true</param>-->
+                <!--<param name="optimizer">none</param>-->
+                <!--<param name="increment_size">1</param>-->
+                <!--<param name="sequence_name">SEQ_COMPONENT</param>-->
+            <!--</generator>-->
+        <!--</id>-->
+        <!--<property name="userid" insert="false" update="false">-->
+            <!--<column name="USERID" sql-type="number(*)" precision="2147483646" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="title">-->
+            <!--<column name="TITLE" sql-type="nvarchar2(50)" length="50"/>-->
+        <!--</property>-->
+        <!--<property name="updated">-->
+            <!--<column name="UPDATED" sql-type="date"/>-->
+        <!--</property>-->
+        <!--<property name="additionalinfo">-->
+            <!--<column name="ADDITIONALINFO" sql-type="nclob"/>-->
+        <!--</property>-->
+        <!--<property name="componenttype" insert="false" update="false">-->
+            <!--<column name="COMPONENTTYPE" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</property>-->
+        <!--<property name="data">-->
+            <!--<column name="DATA" sql-type="public.xmltype"/>-->
+        <!--</property>-->
         <!--<many-to-one name="userByUserid" class="ba.unsa.etf.nsi.charlie.model.UserEntity">-->
             <!--<column name="USERID"/>-->
         <!--</many-to-one>-->
-        <many-to-one name="componenttypeByComponenttype" class="ba.unsa.etf.nsi.charlie.model.ComponentTypeEntity">
-            <column name="COMPONENTTYPE"/>
-        </many-to-one>
-    </class>
-    <class name="ba.unsa.etf.nsi.charlie.model.ComponentTypeEntity" table="COMPONENTTYPE" schema="NSI03">
-        <id name="id">
-            <column name="ID" sql-type="number(10)" precision="10" not-null="true"/>
-            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">
-                <param name="prefer_sequence_per_entity">true</param>
-                <param name="optimizer">none</param>
-                <param name="increment_size">1</param>
-                <param name="sequence_name">SEQ_COMPONENTTYPE</param>
-            </generator>
-        </id>
-        <property name="componenttype">
-            <column name="COMPONENTTYPE" sql-type="varchar2(35)" length="35" not-null="true"/>
-        </property>
-        <set name="componentsById" inverse="true">
-            <key>
-                <column name="COMPONENTTYPE" not-null="true"/>
-            </key>
-            <one-to-many not-found="ignore" class="ba.unsa.etf.nsi.charlie.model.ComponentEntity"/>
-        </set>
-        <set name="componentdraftsById" inverse="true">
-            <key>
-                <column name="COMPONENTTYPE" not-null="true"/>
-            </key>
-            <one-to-many not-found="ignore" class="ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity"/>
-        </set>
-    </class>
-    <class name="ba.unsa.etf.nsi.charlie.model.LogEntity" table="LOG" schema="NSI03">
-        <id name="id">
-            <column name="ID" sql-type="number(10)" precision="10"/>
-            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">
-                <param name="prefer_sequence_per_entity">true</param>
-                <param name="optimizer">none</param>
-                <param name="increment_size">1</param>
-                <param name="sequence_name">SEQ_LOG</param>
-            </generator>
-        </id>
-        <property name="userId" insert="false" update="false">
-            <column name="USER_ID" sql-type="number(10)" precision="10" not-null="true"/>
-        </property>
-        <property name="logText">
-            <column name="LOG_TEXT" sql-type="varchar2(200)" length="200" not-null="true"/>
-        </property>
-        <property name="created">
-            <column name="CREATED" sql-type="date" not-null="true"/>
-        </property>
-        <many-to-one name="userByUserId" class="ba.unsa.etf.nsi.charlie.model.UserEntity">
-            <column name="USER_ID" not-null="true"/>
-        </many-to-one>
-    </class>
-    <class name="ba.unsa.etf.nsi.charlie.model.RoleEntity" table="ROLE" schema="NSI03">
-        <id name="id">
-            <column name="ID" sql-type="number(*)" precision="2147483646"/>
-            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">
-                <param name="prefer_sequence_per_entity">true</param>
-                <param name="optimizer">none</param>
-                <param name="increment_size">1</param>
-                <param name="sequence_name">SEQ_ROLE</param>
-            </generator>
-        </id>
-        <property name="name">
-            <column name="NAME" sql-type="nvarchar2(15)" length="15"/>
-        </property>
-        <set name="userrolesById" inverse="true">
-            <key>
-                <column name="ROLEID"/>
-            </key>
-            <one-to-many not-found="ignore" class="ba.unsa.etf.nsi.charlie.model.UserRoleEntity"/>
-        </set>
-    </class>
-    <class name="ba.unsa.etf.nsi.charlie.model.UserInfoEntity" table="USERINFO" schema="NSI03">
-        <id name="id">
-            <column name="ID" sql-type="number(*)" precision="2147483646"/>
-            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">
-                <param name="prefer_sequence_per_entity">true</param>
-                <param name="optimizer">none</param>
-                <param name="increment_size">1</param>
-                <param name="sequence_name">SEQ_USERINFO</param>
-            </generator>
-        </id>
-        <property name="firstname">
-            <column name="FIRSTNAME" sql-type="nvarchar2(20)" length="20" not-null="true"/>
-        </property>
-        <property name="lastname">
-            <column name="LASTNAME" sql-type="nvarchar2(20)" length="20" not-null="true"/>
-        </property>
-        <one-to-one name="userById" class="ba.unsa.etf.nsi.charlie.model.UserEntity"/>
-    </class>
-    <class name="ba.unsa.etf.nsi.charlie.model.UserRoleEntity" table="USERROLE" schema="NSI03">
-        <id name="id">
-            <column name="ID" sql-type="number(*)" precision="2147483646"/>
-            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">
-                <param name="prefer_sequence_per_entity">true</param>
-                <param name="optimizer">none</param>
-                <param name="increment_size">1</param>
-                <param name="sequence_name">SEQ_USERROLE</param>
-            </generator>
-        </id>
-        <property name="userid" insert="false" update="false">
-            <column name="USERID" sql-type="number(*)" precision="2147483646"/>
-        </property>
-        <property name="roleid" insert="false" update="false">
-            <column name="ROLEID" sql-type="number(*)" precision="2147483646"/>
-        </property>
-        <many-to-one name="userByUserid" class="ba.unsa.etf.nsi.charlie.model.UserEntity">
-            <column name="USERID"/>
-        </many-to-one>
-        <many-to-one name="roleByRoleid" class="ba.unsa.etf.nsi.charlie.model.RoleEntity">
-            <column name="ROLEID"/>
-        </many-to-one>
-    </class>
-    <class name="ba.unsa.etf.nsi.charlie.model.UserEntity" table="SSO_USER" schema="NSI03">
-        <id name="id">
-            <column name="ID" sql-type="number(*)" precision="2147483646"/>
-            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">
-                <param name="prefer_sequence_per_entity">true</param>
-                <param name="optimizer">none</param>
-                <param name="increment_size">1</param>
-                <param name="sequence_name">SEQ_SSO_USER</param>
-            </generator>
-        </id>
-        <property name="username">
-            <column name="USERNAME" sql-type="nvarchar2(20)" length="20"/>
-        </property>
-        <property name="email">
-            <column name="EMAIL" sql-type="nvarchar2(50)" length="50"/>
-        </property>
-        <property name="emailconfirmed">
-            <column name="EMAILCONFIRMED" sql-type="nchar(1)" length="1" not-null="true"/>
-        </property>
-        <property name="passwordhash">
-            <column name="PASSWORDHASH" sql-type="nvarchar2(256)" length="256" not-null="true"/>
-        </property>
-        <one-to-one name="userinfoById" class="ba.unsa.etf.nsi.charlie.model.UserInfoEntity"/>
-        <set name="componentsById" inverse="true">
-            <key>
-                <column name="USERID"/>
-            </key>
-            <one-to-many not-found="ignore" class="ba.unsa.etf.nsi.charlie.model.ComponentEntity"/>
-        </set>
+        <!--<many-to-one name="componenttypeByComponenttype" class="ba.unsa.etf.nsi.charlie.model.ComponentTypeEntity">-->
+            <!--<column name="COMPONENTTYPE"/>-->
+        <!--</many-to-one>-->
         <!--<set name="componentdraftsById" inverse="true">-->
             <!--<key>-->
-                <!--<column name="USERID" not-null="true"/>-->
+                <!--<column name="COMPONENTID"/>-->
             <!--</key>-->
             <!--<one-to-many not-found="ignore" class="ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity"/>-->
         <!--</set>-->
-        <set name="logsById" inverse="true">
-            <key>
-                <column name="USER_ID"/>
-            </key>
-            <one-to-many not-found="ignore" class="ba.unsa.etf.nsi.charlie.model.LogEntity"/>
-        </set>
-        <set name="userrolesById" inverse="true">
-            <key>
-                <column name="USERID"/>
-            </key>
-            <one-to-many not-found="ignore" class="ba.unsa.etf.nsi.charlie.model.UserRoleEntity"/>
-        </set>
-    </class>
-    <class name="ba.unsa.etf.nsi.charlie.model.ComponentEntity" table="COMPONENT" schema="NSI03">
-        <id name="id">
-            <column name="ID" sql-type="number(*)" precision="2147483646"/>
-        </id>
-        <property name="userid">
-            <column name="USERID" sql-type="number(*)" precision="2147483646"/>
-        </property>
-        <property name="title">
-            <column name="TITLE" sql-type="nvarchar2(50)" length="50" not-null="true"/>
-        </property>
-        <property name="updated">
-            <column name="UPDATED" sql-type="date" not-null="true"/>
-        </property>
-        <property name="additionalinfo">
-            <column name="ADDITIONALINFO" sql-type="nclob" not-null="true"/>
-        </property>
-        <property name="componenttype">
-            <column name="COMPONENTTYPE" sql-type="number(*)" precision="2147483646" not-null="true"/>
-        </property>
-        <property name="data">
-            <column name="DATA" sql-type="public.xmltype" not-null="true"/>
-        </property>
-    </class>
-    <class name="ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity" table="COMPONENTDRAFT" schema="NSI03">
-        <id name="id">
-            <column name="ID" sql-type="number(*)" precision="2147483646"/>
-        </id>
-        <property name="componentid">
-            <column name="COMPONENTID" sql-type="number(*)" precision="2147483646" not-null="true"/>
-        </property>
-        <property name="status">
-            <column name="STATUS" sql-type="varchar2(100)" length="100" not-null="true"/>
-        </property>
-        <property name="componenttype">
-            <column name="COMPONENTTYPE" sql-type="number(*)" precision="2147483646" not-null="true"/>
-        </property>
-        <property name="data">
-            <column name="DATA" sql-type="public.xmltype" not-null="true"/>
-        </property>
-        <property name="additionalinfo">
-            <column name="ADDITIONALINFO" sql-type="nclob" not-null="true"/>
-        </property>
-        <property name="userid">
-            <column name="USERID" sql-type="number(*)" precision="2147483646" not-null="true"/>
-        </property>
-    </class>
-    <class name="ba.unsa.etf.nsi.charlie.model.ComponentEntity" table="COMPONENT" schema="NSI03">
-        <id name="id">
-            <column name="ID" sql-type="number(*)" precision="2147483646"/>
-        </id>
-        <property name="userid">
-            <column name="USERID" sql-type="number(*)" precision="2147483646"/>
-        </property>
-        <property name="title">
-            <column name="TITLE" sql-type="nvarchar2(50)" length="50" not-null="true"/>
-        </property>
-        <property name="updated">
-            <column name="UPDATED" sql-type="date" not-null="true"/>
-        </property>
-        <property name="additionalinfo">
-            <column name="ADDITIONALINFO" sql-type="nclob" not-null="true"/>
-        </property>
-        <property name="componenttype">
-            <column name="COMPONENTTYPE" sql-type="number(*)" precision="2147483646" not-null="true"/>
-        </property>
-        <property name="data">
-            <column name="DATA" sql-type="public.xmltype" not-null="true"/>
-        </property>
-    </class>
-    <class name="ba.unsa.etf.nsi.charlie.model.ComponentEntity" table="COMPONENT" schema="NSI03">
-        <id name="id">
-            <column name="ID" sql-type="number(*)" precision="2147483646"/>
-        </id>
-        <property name="userid">
-            <column name="USERID" sql-type="number(*)" precision="2147483646"/>
-        </property>
-        <property name="title">
-            <column name="TITLE" sql-type="nvarchar2(50)" length="50" not-null="true"/>
-        </property>
-        <property name="updated">
-            <column name="UPDATED" sql-type="date" not-null="true"/>
-        </property>
-        <property name="additionalinfo">
-            <column name="ADDITIONALINFO" sql-type="nclob" not-null="true"/>
-        </property>
-        <property name="componenttype">
-            <column name="COMPONENTTYPE" sql-type="number(*)" precision="2147483646" not-null="true"/>
-        </property>
-        <property name="data">
-            <column name="DATA" sql-type="public.xmltype" not-null="true"/>
-        </property>
-    </class>
-    <class name="ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity" table="COMPONENTDRAFT" schema="NSI03">
-        <id name="id">
-            <column name="ID" sql-type="number(*)" precision="2147483646"/>
-        </id>
-        <property name="componentid">
-            <column name="COMPONENTID" sql-type="number(*)" precision="2147483646" not-null="true"/>
-        </property>
-        <property name="status">
-            <column name="STATUS" sql-type="varchar2(100)" length="100" not-null="true"/>
-        </property>
-        <property name="componenttype">
-            <column name="COMPONENTTYPE" sql-type="number(*)" precision="2147483646" not-null="true"/>
-        </property>
-        <property name="data">
-            <column name="DATA" sql-type="public.xmltype" not-null="true"/>
-        </property>
-        <property name="additionalinfo">
-            <column name="ADDITIONALINFO" sql-type="nclob" not-null="true"/>
-        </property>
-        <property name="userid">
-            <column name="USERID" sql-type="number(*)" precision="2147483646" not-null="true"/>
-        </property>
-    </class>
-    <class name="ba.unsa.etf.nsi.charlie.model.ComponentTypeEntity" table="COMPONENTTYPE" schema="NSI03">
-        <id name="id">
-            <column name="ID" sql-type="number(*)" precision="2147483646"/>
-        </id>
-        <property name="componenttype">
-            <column name="COMPONENTTYPE" sql-type="varchar2(35)" length="35"/>
-        </property>
-    </class>
-    <class name="ba.unsa.etf.nsi.charlie.model.LogEntity" table="LOG" schema="NSI03">
-        <id name="id">
-            <column name="ID" sql-type="number(*)" precision="2147483646"/>
-        </id>
-        <property name="userId">
-            <column name="USER_ID" sql-type="number(*)" precision="2147483646"/>
-        </property>
-        <property name="logText">
-            <column name="LOG_TEXT" sql-type="varchar2(200)" length="200"/>
-        </property>
-        <property name="created">
-            <column name="CREATED" sql-type="date"/>
-        </property>
-    </class>
-    <class name="ba.unsa.etf.nsi.charlie.model.RoleEntity" table="ROLE" schema="NSI03">
-        <id name="id">
-            <column name="ID" sql-type="number(*)" precision="2147483646"/>
-        </id>
-        <property name="name">
-            <column name="NAME" sql-type="nvarchar2(15)" length="15"/>
-        </property>
-    </class>
-    <class name="ba.unsa.etf.nsi.charlie.model.ComponentEntity" table="COMPONENT" schema="NSI03">
-        <id name="id">
-            <column name="ID" sql-type="number(*)" precision="2147483646"/>
-        </id>
-        <property name="userid">
-            <column name="USERID" sql-type="number(*)" precision="2147483646"/>
-        </property>
-        <property name="title">
-            <column name="TITLE" sql-type="nvarchar2(50)" length="50" not-null="true"/>
-        </property>
-        <property name="updated">
-            <column name="UPDATED" sql-type="date" not-null="true"/>
-        </property>
-        <property name="additionalinfo">
-            <column name="ADDITIONALINFO" sql-type="nclob" not-null="true"/>
-        </property>
-        <property name="componenttype">
-            <column name="COMPONENTTYPE" sql-type="number(*)" precision="2147483646" not-null="true"/>
-        </property>
-        <property name="data">
-            <column name="DATA" sql-type="public.xmltype" not-null="true"/>
-        </property>
-    </class>
-    <class name="ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity" table="COMPONENTDRAFT" schema="NSI03">
-        <id name="id">
-            <column name="ID" sql-type="number(*)" precision="2147483646"/>
-        </id>
-        <property name="componentid">
-            <column name="COMPONENTID" sql-type="number(*)" precision="2147483646" not-null="true"/>
-        </property>
-        <property name="status">
-            <column name="STATUS" sql-type="varchar2(100)" length="100" not-null="true"/>
-        </property>
-        <property name="componenttype">
-            <column name="COMPONENTTYPE" sql-type="number(*)" precision="2147483646" not-null="true"/>
-        </property>
-        <property name="data">
-            <column name="DATA" sql-type="public.xmltype" not-null="true"/>
-        </property>
-        <property name="additionalinfo">
-            <column name="ADDITIONALINFO" sql-type="nclob" not-null="true"/>
-        </property>
-        <property name="userid">
-            <column name="USERID" sql-type="number(*)" precision="2147483646" not-null="true"/>
-        </property>
-    </class>
-    <class name="ba.unsa.etf.nsi.charlie.model.ComponentTypeEntity" table="COMPONENTTYPE" schema="NSI03">
-        <id name="id">
-            <column name="ID" sql-type="number(*)" precision="2147483646"/>
-        </id>
-        <property name="componenttype">
-            <column name="COMPONENTTYPE" sql-type="varchar2(35)" length="35"/>
-        </property>
-    </class>
-    <class name="ba.unsa.etf.nsi.charlie.model.LogEntity" table="LOG" schema="NSI03">
-        <id name="id">
-            <column name="ID" sql-type="number(*)" precision="2147483646"/>
-        </id>
-        <property name="userId">
-            <column name="USER_ID" sql-type="number(*)" precision="2147483646"/>
-        </property>
-        <property name="logText">
-            <column name="LOG_TEXT" sql-type="varchar2(200)" length="200"/>
-        </property>
-        <property name="created">
-            <column name="CREATED" sql-type="date"/>
-        </property>
-    </class>
-    <class name="ba.unsa.etf.nsi.charlie.model.RoleEntity" table="ROLE" schema="NSI03">
-        <id name="id">
-            <column name="ID" sql-type="number(*)" precision="2147483646"/>
-        </id>
-        <property name="name">
-            <column name="NAME" sql-type="nvarchar2(15)" length="15"/>
-        </property>
-    </class>
-    <class name="ba.unsa.etf.nsi.charlie.model.UserEntity" table="SSO_USER" schema="NSI03">
-        <id name="id">
-            <column name="ID" sql-type="number(*)" precision="2147483646"/>
-        </id>
-        <property name="username">
-            <column name="USERNAME" sql-type="nvarchar2(20)" length="20"/>
-        </property>
-        <property name="email">
-            <column name="EMAIL" sql-type="nvarchar2(50)" length="50"/>
-        </property>
-        <property name="emailconfirmed">
-            <column name="EMAILCONFIRMED" sql-type="nchar(1)" length="1" not-null="true"/>
-        </property>
-        <property name="passwordhash">
-            <column name="PASSWORDHASH" sql-type="nvarchar2(256)" length="256" not-null="true"/>
-        </property>
-    </class>
+    <!--</class>-->
+    <!--<class name="ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity" table="COMPONENTDRAFT" schema="NSI03">-->
+        <!--<id name="id">-->
+            <!--<column name="ID" sql-type="number(*)" precision="2147483646" not-null="true"/>-->
+            <!--<generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">-->
+                <!--<param name="prefer_sequence_per_entity">true</param>-->
+                <!--<param name="optimizer">none</param>-->
+                <!--<param name="increment_size">1</param>-->
+                <!--<param name="sequence_name">SEQ_COMPONENTDRAFT</param>-->
+            <!--</generator>-->
+        <!--</id>-->
+        <!--<property name="componentid" insert="false" update="false">-->
+            <!--<column name="COMPONENTID" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</property>-->
+        <!--<property name="status">-->
+            <!--<column name="STATUS" sql-type="varchar2(100)" length="100"/>-->
+        <!--</property>-->
+        <!--<property name="additionalinfo">-->
+            <!--<column name="ADDITIONALINFO" sql-type="varchar2(100)" length="100"/>-->
+        <!--</property>-->
+        <!--<property name="userid" insert="false" update="false">-->
+            <!--<column name="USERID" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</property>-->
+        <!--<property name="componenttype" insert="false" update="false">-->
+            <!--<column name="COMPONENTTYPE" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</property>-->
+        <!--<property name="data">-->
+            <!--<column name="DATA" sql-type="public.xmltype"/>-->
+        <!--</property>-->
+        <!--<many-to-one name="componentByComponentid" class="ba.unsa.etf.nsi.charlie.model.ComponentEntity">-->
+            <!--<column name="COMPONENTID"/>-->
+        <!--</many-to-one>-->
+        <!--&lt;!&ndash;<many-to-one name="userByUserid" class="ba.unsa.etf.nsi.charlie.model.UserEntity">&ndash;&gt;-->
+            <!--&lt;!&ndash;<column name="USERID"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;</many-to-one>&ndash;&gt;-->
+        <!--<many-to-one name="componenttypeByComponenttype" class="ba.unsa.etf.nsi.charlie.model.ComponentTypeEntity">-->
+            <!--<column name="COMPONENTTYPE"/>-->
+        <!--</many-to-one>-->
+    <!--</class>-->
+    <!--<class name="ba.unsa.etf.nsi.charlie.model.ComponentTypeEntity" table="COMPONENTTYPE" schema="NSI03">-->
+        <!--<id name="id">-->
+            <!--<column name="ID" sql-type="number(10)" precision="10" not-null="true"/>-->
+            <!--<generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">-->
+                <!--<param name="prefer_sequence_per_entity">true</param>-->
+                <!--<param name="optimizer">none</param>-->
+                <!--<param name="increment_size">1</param>-->
+                <!--<param name="sequence_name">SEQ_COMPONENTTYPE</param>-->
+            <!--</generator>-->
+        <!--</id>-->
+        <!--<property name="componenttype">-->
+            <!--<column name="COMPONENTTYPE" sql-type="varchar2(35)" length="35" not-null="true"/>-->
+        <!--</property>-->
+        <!--<set name="componentsById" inverse="true">-->
+            <!--<key>-->
+                <!--<column name="COMPONENTTYPE" not-null="true"/>-->
+            <!--</key>-->
+            <!--<one-to-many not-found="ignore" class="ba.unsa.etf.nsi.charlie.model.ComponentEntity"/>-->
+        <!--</set>-->
+        <!--<set name="componentdraftsById" inverse="true">-->
+            <!--<key>-->
+                <!--<column name="COMPONENTTYPE" not-null="true"/>-->
+            <!--</key>-->
+            <!--<one-to-many not-found="ignore" class="ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity"/>-->
+        <!--</set>-->
+    <!--</class>-->
+    <!--<class name="ba.unsa.etf.nsi.charlie.model.LogEntity" table="LOG" schema="NSI03">-->
+        <!--<id name="id">-->
+            <!--<column name="ID" sql-type="number(10)" precision="10"/>-->
+            <!--<generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">-->
+                <!--<param name="prefer_sequence_per_entity">true</param>-->
+                <!--<param name="optimizer">none</param>-->
+                <!--<param name="increment_size">1</param>-->
+                <!--<param name="sequence_name">SEQ_LOG</param>-->
+            <!--</generator>-->
+        <!--</id>-->
+        <!--<property name="userId" insert="false" update="false">-->
+            <!--<column name="USER_ID" sql-type="number(10)" precision="10" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="logText">-->
+            <!--<column name="LOG_TEXT" sql-type="varchar2(200)" length="200" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="created">-->
+            <!--<column name="CREATED" sql-type="date" not-null="true"/>-->
+        <!--</property>-->
+        <!--<many-to-one name="userByUserId" class="ba.unsa.etf.nsi.charlie.model.UserEntity">-->
+            <!--<column name="USER_ID" not-null="true"/>-->
+        <!--</many-to-one>-->
+    <!--</class>-->
+    <!--<class name="ba.unsa.etf.nsi.charlie.model.RoleEntity" table="ROLE" schema="NSI03">-->
+        <!--<id name="id">-->
+            <!--<column name="ID" sql-type="number(*)" precision="2147483646"/>-->
+            <!--<generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">-->
+                <!--<param name="prefer_sequence_per_entity">true</param>-->
+                <!--<param name="optimizer">none</param>-->
+                <!--<param name="increment_size">1</param>-->
+                <!--<param name="sequence_name">SEQ_ROLE</param>-->
+            <!--</generator>-->
+        <!--</id>-->
+        <!--<property name="name">-->
+            <!--<column name="NAME" sql-type="nvarchar2(15)" length="15"/>-->
+        <!--</property>-->
+        <!--<set name="userrolesById" inverse="true">-->
+            <!--<key>-->
+                <!--<column name="ROLEID"/>-->
+            <!--</key>-->
+            <!--<one-to-many not-found="ignore" class="ba.unsa.etf.nsi.charlie.model.UserRoleEntity"/>-->
+        <!--</set>-->
+    <!--</class>-->
+    <!--<class name="ba.unsa.etf.nsi.charlie.model.UserInfoEntity" table="USERINFO" schema="NSI03">-->
+        <!--<id name="id">-->
+            <!--<column name="ID" sql-type="number(*)" precision="2147483646"/>-->
+            <!--<generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">-->
+                <!--<param name="prefer_sequence_per_entity">true</param>-->
+                <!--<param name="optimizer">none</param>-->
+                <!--<param name="increment_size">1</param>-->
+                <!--<param name="sequence_name">SEQ_USERINFO</param>-->
+            <!--</generator>-->
+        <!--</id>-->
+        <!--<property name="firstname">-->
+            <!--<column name="FIRSTNAME" sql-type="nvarchar2(20)" length="20" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="lastname">-->
+            <!--<column name="LASTNAME" sql-type="nvarchar2(20)" length="20" not-null="true"/>-->
+        <!--</property>-->
+        <!--<one-to-one name="userById" class="ba.unsa.etf.nsi.charlie.model.UserEntity"/>-->
+    <!--</class>-->
+    <!--<class name="ba.unsa.etf.nsi.charlie.model.UserRoleEntity" table="USERROLE" schema="NSI03">-->
+        <!--<id name="id">-->
+            <!--<column name="ID" sql-type="number(*)" precision="2147483646"/>-->
+            <!--<generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">-->
+                <!--<param name="prefer_sequence_per_entity">true</param>-->
+                <!--<param name="optimizer">none</param>-->
+                <!--<param name="increment_size">1</param>-->
+                <!--<param name="sequence_name">SEQ_USERROLE</param>-->
+            <!--</generator>-->
+        <!--</id>-->
+        <!--<property name="userid" insert="false" update="false">-->
+            <!--<column name="USERID" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</property>-->
+        <!--<property name="roleid" insert="false" update="false">-->
+            <!--<column name="ROLEID" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</property>-->
+        <!--<many-to-one name="userByUserid" class="ba.unsa.etf.nsi.charlie.model.UserEntity">-->
+            <!--<column name="USERID"/>-->
+        <!--</many-to-one>-->
+        <!--<many-to-one name="roleByRoleid" class="ba.unsa.etf.nsi.charlie.model.RoleEntity">-->
+            <!--<column name="ROLEID"/>-->
+        <!--</many-to-one>-->
+    <!--</class>-->
+    <!--<class name="ba.unsa.etf.nsi.charlie.model.UserEntity" table="SSO_USER" schema="NSI03">-->
+        <!--<id name="id">-->
+            <!--<column name="ID" sql-type="number(*)" precision="2147483646"/>-->
+            <!--<generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">-->
+                <!--<param name="prefer_sequence_per_entity">true</param>-->
+                <!--<param name="optimizer">none</param>-->
+                <!--<param name="increment_size">1</param>-->
+                <!--<param name="sequence_name">SEQ_SSO_USER</param>-->
+            <!--</generator>-->
+        <!--</id>-->
+        <!--<property name="username">-->
+            <!--<column name="USERNAME" sql-type="nvarchar2(20)" length="20"/>-->
+        <!--</property>-->
+        <!--<property name="email">-->
+            <!--<column name="EMAIL" sql-type="nvarchar2(50)" length="50"/>-->
+        <!--</property>-->
+        <!--<property name="emailconfirmed">-->
+            <!--<column name="EMAILCONFIRMED" sql-type="nchar(1)" length="1" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="passwordhash">-->
+            <!--<column name="PASSWORDHASH" sql-type="nvarchar2(256)" length="256" not-null="true"/>-->
+        <!--</property>-->
+        <!--<one-to-one name="userinfoById" class="ba.unsa.etf.nsi.charlie.model.UserInfoEntity"/>-->
+        <!--<set name="componentsById" inverse="true">-->
+            <!--<key>-->
+                <!--<column name="USERID"/>-->
+            <!--</key>-->
+            <!--<one-to-many not-found="ignore" class="ba.unsa.etf.nsi.charlie.model.ComponentEntity"/>-->
+        <!--</set>-->
+        <!--&lt;!&ndash;<set name="componentdraftsById" inverse="true">&ndash;&gt;-->
+            <!--&lt;!&ndash;<key>&ndash;&gt;-->
+                <!--&lt;!&ndash;<column name="USERID" not-null="true"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;</key>&ndash;&gt;-->
+            <!--&lt;!&ndash;<one-to-many not-found="ignore" class="ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;</set>&ndash;&gt;-->
+        <!--<set name="logsById" inverse="true">-->
+            <!--<key>-->
+                <!--<column name="USER_ID"/>-->
+            <!--</key>-->
+            <!--<one-to-many not-found="ignore" class="ba.unsa.etf.nsi.charlie.model.LogEntity"/>-->
+        <!--</set>-->
+        <!--<set name="userrolesById" inverse="true">-->
+            <!--<key>-->
+                <!--<column name="USERID"/>-->
+            <!--</key>-->
+            <!--<one-to-many not-found="ignore" class="ba.unsa.etf.nsi.charlie.model.UserRoleEntity"/>-->
+        <!--</set>-->
+    <!--</class>-->
+    <!--<class name="ba.unsa.etf.nsi.charlie.model.ComponentEntity" table="COMPONENT" schema="NSI03">-->
+        <!--<id name="id">-->
+            <!--<column name="ID" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</id>-->
+        <!--<property name="userid">-->
+            <!--<column name="USERID" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</property>-->
+        <!--<property name="title">-->
+            <!--<column name="TITLE" sql-type="nvarchar2(50)" length="50" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="updated">-->
+            <!--<column name="UPDATED" sql-type="date" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="additionalinfo">-->
+            <!--<column name="ADDITIONALINFO" sql-type="nclob" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="componenttype">-->
+            <!--<column name="COMPONENTTYPE" sql-type="number(*)" precision="2147483646" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="data">-->
+            <!--<column name="DATA" sql-type="public.xmltype" not-null="true"/>-->
+        <!--</property>-->
+    <!--</class>-->
+    <!--<class name="ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity" table="COMPONENTDRAFT" schema="NSI03">-->
+        <!--<id name="id">-->
+            <!--<column name="ID" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</id>-->
+        <!--<property name="componentid">-->
+            <!--<column name="COMPONENTID" sql-type="number(*)" precision="2147483646" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="status">-->
+            <!--<column name="STATUS" sql-type="varchar2(100)" length="100" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="componenttype">-->
+            <!--<column name="COMPONENTTYPE" sql-type="number(*)" precision="2147483646" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="data">-->
+            <!--<column name="DATA" sql-type="public.xmltype" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="additionalinfo">-->
+            <!--<column name="ADDITIONALINFO" sql-type="nclob" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="userid">-->
+            <!--<column name="USERID" sql-type="number(*)" precision="2147483646" not-null="true"/>-->
+        <!--</property>-->
+    <!--</class>-->
+    <!--<class name="ba.unsa.etf.nsi.charlie.model.ComponentEntity" table="COMPONENT" schema="NSI03">-->
+        <!--<id name="id">-->
+            <!--<column name="ID" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</id>-->
+        <!--<property name="userid">-->
+            <!--<column name="USERID" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</property>-->
+        <!--<property name="title">-->
+            <!--<column name="TITLE" sql-type="nvarchar2(50)" length="50" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="updated">-->
+            <!--<column name="UPDATED" sql-type="date" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="additionalinfo">-->
+            <!--<column name="ADDITIONALINFO" sql-type="nclob" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="componenttype">-->
+            <!--<column name="COMPONENTTYPE" sql-type="number(*)" precision="2147483646" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="data">-->
+            <!--<column name="DATA" sql-type="public.xmltype" not-null="true"/>-->
+        <!--</property>-->
+    <!--</class>-->
+    <!--<class name="ba.unsa.etf.nsi.charlie.model.ComponentEntity" table="COMPONENT" schema="NSI03">-->
+        <!--<id name="id">-->
+            <!--<column name="ID" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</id>-->
+        <!--<property name="userid">-->
+            <!--<column name="USERID" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</property>-->
+        <!--<property name="title">-->
+            <!--<column name="TITLE" sql-type="nvarchar2(50)" length="50" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="updated">-->
+            <!--<column name="UPDATED" sql-type="date" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="additionalinfo">-->
+            <!--<column name="ADDITIONALINFO" sql-type="nclob" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="componenttype">-->
+            <!--<column name="COMPONENTTYPE" sql-type="number(*)" precision="2147483646" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="data">-->
+            <!--<column name="DATA" sql-type="public.xmltype" not-null="true"/>-->
+        <!--</property>-->
+    <!--</class>-->
+    <!--<class name="ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity" table="COMPONENTDRAFT" schema="NSI03">-->
+        <!--<id name="id">-->
+            <!--<column name="ID" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</id>-->
+        <!--<property name="componentid">-->
+            <!--<column name="COMPONENTID" sql-type="number(*)" precision="2147483646" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="status">-->
+            <!--<column name="STATUS" sql-type="varchar2(100)" length="100" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="componenttype">-->
+            <!--<column name="COMPONENTTYPE" sql-type="number(*)" precision="2147483646" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="data">-->
+            <!--<column name="DATA" sql-type="public.xmltype" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="additionalinfo">-->
+            <!--<column name="ADDITIONALINFO" sql-type="nclob" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="userid">-->
+            <!--<column name="USERID" sql-type="number(*)" precision="2147483646" not-null="true"/>-->
+        <!--</property>-->
+    <!--</class>-->
+    <!--<class name="ba.unsa.etf.nsi.charlie.model.ComponentTypeEntity" table="COMPONENTTYPE" schema="NSI03">-->
+        <!--<id name="id">-->
+            <!--<column name="ID" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</id>-->
+        <!--<property name="componenttype">-->
+            <!--<column name="COMPONENTTYPE" sql-type="varchar2(35)" length="35"/>-->
+        <!--</property>-->
+    <!--</class>-->
+    <!--<class name="ba.unsa.etf.nsi.charlie.model.LogEntity" table="LOG" schema="NSI03">-->
+        <!--<id name="id">-->
+            <!--<column name="ID" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</id>-->
+        <!--<property name="userId">-->
+            <!--<column name="USER_ID" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</property>-->
+        <!--<property name="logText">-->
+            <!--<column name="LOG_TEXT" sql-type="varchar2(200)" length="200"/>-->
+        <!--</property>-->
+        <!--<property name="created">-->
+            <!--<column name="CREATED" sql-type="date"/>-->
+        <!--</property>-->
+    <!--</class>-->
+    <!--<class name="ba.unsa.etf.nsi.charlie.model.RoleEntity" table="ROLE" schema="NSI03">-->
+        <!--<id name="id">-->
+            <!--<column name="ID" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</id>-->
+        <!--<property name="name">-->
+            <!--<column name="NAME" sql-type="nvarchar2(15)" length="15"/>-->
+        <!--</property>-->
+    <!--</class>-->
+    <!--<class name="ba.unsa.etf.nsi.charlie.model.ComponentEntity" table="COMPONENT" schema="NSI03">-->
+        <!--<id name="id">-->
+            <!--<column name="ID" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</id>-->
+        <!--<property name="userid">-->
+            <!--<column name="USERID" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</property>-->
+        <!--<property name="title">-->
+            <!--<column name="TITLE" sql-type="nvarchar2(50)" length="50" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="updated">-->
+            <!--<column name="UPDATED" sql-type="date" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="additionalinfo">-->
+            <!--<column name="ADDITIONALINFO" sql-type="nclob" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="componenttype">-->
+            <!--<column name="COMPONENTTYPE" sql-type="number(*)" precision="2147483646" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="data">-->
+            <!--<column name="DATA" sql-type="public.xmltype" not-null="true"/>-->
+        <!--</property>-->
+    <!--</class>-->
+    <!--<class name="ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity" table="COMPONENTDRAFT" schema="NSI03">-->
+        <!--<id name="id">-->
+            <!--<column name="ID" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</id>-->
+        <!--<property name="componentid">-->
+            <!--<column name="COMPONENTID" sql-type="number(*)" precision="2147483646" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="status">-->
+            <!--<column name="STATUS" sql-type="varchar2(100)" length="100" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="componenttype">-->
+            <!--<column name="COMPONENTTYPE" sql-type="number(*)" precision="2147483646" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="data">-->
+            <!--<column name="DATA" sql-type="public.xmltype" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="additionalinfo">-->
+            <!--<column name="ADDITIONALINFO" sql-type="nclob" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="userid">-->
+            <!--<column name="USERID" sql-type="number(*)" precision="2147483646" not-null="true"/>-->
+        <!--</property>-->
+    <!--</class>-->
+    <!--<class name="ba.unsa.etf.nsi.charlie.model.ComponentTypeEntity" table="COMPONENTTYPE" schema="NSI03">-->
+        <!--<id name="id">-->
+            <!--<column name="ID" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</id>-->
+        <!--<property name="componenttype">-->
+            <!--<column name="COMPONENTTYPE" sql-type="varchar2(35)" length="35"/>-->
+        <!--</property>-->
+    <!--</class>-->
+    <!--<class name="ba.unsa.etf.nsi.charlie.model.LogEntity" table="LOG" schema="NSI03">-->
+        <!--<id name="id">-->
+            <!--<column name="ID" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</id>-->
+        <!--<property name="userId">-->
+            <!--<column name="USER_ID" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</property>-->
+        <!--<property name="logText">-->
+            <!--<column name="LOG_TEXT" sql-type="varchar2(200)" length="200"/>-->
+        <!--</property>-->
+        <!--<property name="created">-->
+            <!--<column name="CREATED" sql-type="date"/>-->
+        <!--</property>-->
+    <!--</class>-->
+    <!--<class name="ba.unsa.etf.nsi.charlie.model.RoleEntity" table="ROLE" schema="NSI03">-->
+        <!--<id name="id">-->
+            <!--<column name="ID" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</id>-->
+        <!--<property name="name">-->
+            <!--<column name="NAME" sql-type="nvarchar2(15)" length="15"/>-->
+        <!--</property>-->
+    <!--</class>-->
+    <!--<class name="ba.unsa.etf.nsi.charlie.model.UserEntity" table="SSO_USER" schema="NSI03">-->
+        <!--<id name="id">-->
+            <!--<column name="ID" sql-type="number(*)" precision="2147483646"/>-->
+        <!--</id>-->
+        <!--<property name="username">-->
+            <!--<column name="USERNAME" sql-type="nvarchar2(20)" length="20"/>-->
+        <!--</property>-->
+        <!--<property name="email">-->
+            <!--<column name="EMAIL" sql-type="nvarchar2(50)" length="50"/>-->
+        <!--</property>-->
+        <!--<property name="emailconfirmed">-->
+            <!--<column name="EMAILCONFIRMED" sql-type="nchar(1)" length="1" not-null="true"/>-->
+        <!--</property>-->
+        <!--<property name="passwordhash">-->
+            <!--<column name="PASSWORDHASH" sql-type="nvarchar2(256)" length="256" not-null="true"/>-->
+        <!--</property>-->
+    <!--</class>-->
 </hibernate-mapping>

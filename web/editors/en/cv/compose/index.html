@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="etfpass">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	
+	<title>Europass: Curriculum vitae European Skills Passport</title>
+	
+<!-- 	<script src="/editors/static/ewa/libraries/onedrive/wl.js?version=5.0.32"></script>
+	<script type="text/javascript" src="/editors/static/ewa/libraries/touch/touche-20140704-TRUNK.js?version=5.0.32"></script> -->
+	
+	<link rel="shortcut icon" href="/editors/static/ewa/images/favicon.ico" />
+	<link rel="icon" href="/editors/static/ewa/images/favicon.gif" type="image/gif" />
+	<link rel="stylesheet" href="/editors/static/ewa/styles/css-reset.css?version=5.0.32" type="text/css" />
+	<link rel="stylesheet" href="/editors/static/ewa/styles/all-styles.css?version=5.0.32" type="text/css" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700italic,700,300,400italic,600,800&subset=latin,greek,cyrillic" type="text/css">
+
+	<!--[if IE]>
+	<link rel="stylesheet" 
+		type="text/css" 
+		href="/editors/static/ewa/styles/ewa-ie-background.css?version=5.0.32" />
+	<![endif]-->
+
+	<!--[if lte IE 9]>
+	<script src="/editors/static/ewa/util/html5.js?version=5.0.32"></script>
+	<script src="/editors/static/ewa/scripts/unsupportedBrowser.jsp?version=5.0.32"></script>
+	<![endif]-->
+
+<script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-cookies.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+<script src="/editors/static/ewa/scripts/etfpass.js"></script>
+<script src="/editors/static/ewa/util/google-analytics.js?version=5.0.32"></script>
+
+<!--[if IE]>
+
+<script type="text/javascript">
+ /* When we are redirected to the page from a different location 
+  * (ie: using HTTP header "Location"), 
+  * then modifying the hash will result in a reload.
+  */
+  window.location.hash = window.location.hash; 
+  /* In normal circumstances, this should be a no-op, 
+   * but if the user is using IE and has arrived via a redirect, 
+   * the page will reload before they even notice it has loaded
+   */
+</script>
+<![endif]-->
+<script type="text/javascript">
+window.onload=function(){createDynamicBounceDiv();};
+
+window.sessionLocale  = "en";
+window.remoteModel    = "";
+window.remoteFeedback = "";
+
+window.config = {	
+	 photosize               : "1MB"
+	,photomimes              : "image/jpeg,image/pjpeg,image/x-png,image/png"
+	,phototypes              : "PNG, JPG"
+	,photoext                : ".jpg,.jpeg,.jpe,.png"
+	,signaturesize           : "1MB"
+	,signaturemimes          : "image/x-png,image/png,image/jpeg,image/pjpeg"
+	,signaturetypes          : "PNG, JPG"
+	,signatureext            : ".png,.jpg,.jpeg,.jpe"
+	,fileCumulativeSize      : "10MB"
+	,filesize                : "2.5MB"
+	,filemimes               : "image/jpeg,image/pjpeg,image/x-png,image/png,application/pdf,application/x-pdf"
+	,filetypes               : "PDF, PNG, JPG"
+	,fileext                 : ".jpg,.jpeg,.jpe,.png,.pdf"
+	,googleanalytics         : "true"
+	,version                 : "312"
+	,api                     : "https://europass.cedefop.europa.eu/api"
+	,serverDateTime          : "2016-12-17T18:37:27.770Z"
+	,defaultEwaEditorContext : "editors"
+	,operatingSystem         : "MODERN"
+	,browserName             : "Chrome/"
+	,browserDescription      : ""
+	,cloudStorageFolder      : "Europass"	//TODO: decide how it will be loaded
+	,cloudShareFolder        : "Europass/shares"
+	,onedriveAppkey          : "000000004412DF54"
+	,googledriveAppId        : "1039120319622"
+	,googledriveClientId     : "1039120319622-ts7fo9ko7hp89omrhckh8cn6pl8ik0mh.apps.googleusercontent.com"
+	,googledriveDevKey       : "AIzaSyBthgBGIMVjVFTZvwLd7Ku--eA9LyGOnww"
+	,dropboxAppKey           : "5m393kkml5mjg25"
+	,dropboxCallbackUrl      : "/editors/dropbox_oauth_receiver.html"
+	,showShareButton         : "true"
+	,showShareXingButton     : ""
+	,showShareMonsterButton  : ""
+	,showShareForReview		 : ""	
+	,remoteUploadPartnerKey  : ""
+	,remoteUploadCallbackUrl : ""
+	,survey                  : "false"	
+	,cookieId				 : "europass-editors-user"	
+};
+
+window.resourcesBase = "/editors";
+
+/**
+ * Dynamic creation of content according to browser animation support. For no animation support an animated gif is used, otherwise use animation css. 
+ */
+function createDynamicBounceDiv(){
+	var d1 = document.createElement("div");
+	d1.className= 'bounce1';
+	var d2 = document.createElement("div");
+	d2.className= 'bounce2';
+	var d3 = document.createElement("div");
+	d3.className= 'bounce3';
+	var parentDiv = document.getElementById("page-loading-waiting-indicator-graphic");
+	parentDiv.appendChild(d1);
+	parentDiv.appendChild(d2);
+	parentDiv.appendChild(d3);
+}
+
+</script>
+</head>
+<body ng-controller="CvController">
+	<section id="page-loading-waiting-indicator">
+		<div class="opacity">&nbsp;<span class="indicator-logo">&nbsp;</span></div>
+		<div id="page-loading-waiting-indicator-graphic" class="loading spinner"></div>
+	</section>
+	<section id="page-loading-error" style="display:none">
+		<div id="error_msg" class="error_msg">Loading the page seems to take too long.You may want to refresh the page or try again later.</div>
+	</section>
+	<!-- main.hbs goes here -->
+
+<script type="text/javascript" 
+		data-main="/editors/static/ewa/scripts/main"
+		project-version="5.0.32"
+		src="/editors/static/ewa/libraries/require/require-2.1.14-min.js?version=5.0.32"></script>
+<script>
+	// define waitSeconds to override the default, until main.js loads
+	require.config({ waitSeconds: 90 });</script>
+<script id="dropboxjs" 
+		data-app-key="5m393kkml5mjg25"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="./manager/assets/cicle-progress.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<body style="background-color: #2C4969">
+
+<div class="container" ng-app=""  >
+  <ul class="nav nav-pills ">
+    <li role="presentation" style="margin-top:20px;margin-right:58.25%" >
+      <img alt="Brand" src="Logomakr.png" >
+    </li>
+    <li role="presentation" style="margin-top:20px"><a style="color:#1093CB">Home</a></li>
+    <li role="presentation" class="dropdown" style="margin-top:20px">
+      <a style="color:#1093CB" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+        Welcome, admin <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">User CVs</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="#">Logout</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <br><br><br>
+  <h2 style="color:#F7C820;text-align:center">New CVs for approval</h2>
+  <hr style="height: 30px;border-style: solid;border-color: #1093CB;border-width:1px 0 0 0;border-radius: 20px;">
+
+  <form class="navbar-form navbar-left" role="search" style="margin-left:78.2%">
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Search">
+</div>
+  </form>
+  <!-- Table -->
+    <table class="table">
+     <thead>
+       <tr style="color:#1093CB">
+         <th>User</th>
+         <th>New CV</th>
+         <th>Approval</th>
+       </tr>
+     </thead>
+     <tbody style="color:white">
+       <tr>
+         <td style="line-height:50px">Elmir Hodzic</td>
+         <td style="line-height:50px"><button type="submit" class="btn btn-link">Check for approval</button></td>
+		 <td>
+			<ul class="pager">
+				<li><a href="#">Approve</a></li>
+				<li><a href="#">Dismiss</a></li>
+			</ul>
+		 </td>
+	   </tr>
+       <tr>
+         <td style="line-height:50px">Malik Koljenovic</td>
+         <td style="line-height:50px"><button type="submit" class="btn btn-link">Check for approval</button></td>
+		 <td>
+			<ul class="pager">
+				<li><a href="#">Approve</a></li>
+				<li><a href="#">Dismiss</a></li>
+			</ul>
+		 </td>
+       </tr>
+       <tr>
+         <td style="line-height:50px">Haris Semic</td>
+         <td style="line-height:50px"><button type="submit" class="btn btn-link">Check for approval</button></td>
+		 <td>
+			<ul class="pager">
+				<li><a href="#">Approve</a></li>
+				<li><a href="#">Dismiss</a></li>
+			</ul>
+		 </td>
+       </tr>
+     </tbody>
+   </table>
+
+   <nav aria-label="...">
+    <ul class="pager">
+      <li><a href="#">Previous</a></li>
+      <li><a href="#">Next</a></li>
+    </ul>
+  </nav>
+
+  <hr style="height: 30px;border-style: solid;border-color: #54abdd;border-width:0 0 1px 0;border-radius: 20px;">
+
+ </div>
+
+</div>
+
+
+</body>
+</html>

@@ -33,7 +33,6 @@ public class ComponentTypeDeserializer implements JsonDeserializer<ComponentType
 
         Session s = HibernateHelper.getSession();
         entity.setComponentsById(new HashSet<ComponentEntity>(s.createQuery("from ComponentEntity t where t.componenttype = :id").setParameter("id", id).list()));
-        entity.setComponentdraftsById(new HashSet<ComponentDraftEntity>(s.createQuery("from ComponentDraftEntity t where t.componenttype = :id").setParameter("id", id).list()));
 
         s.close();
         return entity;

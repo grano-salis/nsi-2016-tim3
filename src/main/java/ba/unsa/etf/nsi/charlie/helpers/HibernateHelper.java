@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 public class HibernateHelper {
 
     public static SessionFactory factory = null;
+    public static SessionFactory ssoFactory = null;
 
     private HibernateHelper() {
     }
@@ -35,6 +36,23 @@ public class HibernateHelper {
     }
 
     public static Session getSession() throws HibernateException {
+        return initFactory().openSession();
+    }
+
+    private static synchronized SessionFactory initSSOFactory() {
+        try {
+            if (ssoFactory == null) {
+                Configuration configuration = new Configuration();
+                configuration.configure("sso.hib.cfg.xml");
+                ssoFactory = configuration.buildSessionFactory();
+            }
+        } catch (Throwable ex) {
+            throw new ExceptionInInitializerError(ex);
+        }
+        return ssoFactory;
+    }
+
+    public static Session getSSOSession() throws HibernateException {
         return initFactory().openSession();
     }
 

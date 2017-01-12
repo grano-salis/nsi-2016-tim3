@@ -1,10 +1,7 @@
 package ba.unsa.etf.nsi.charlie.service.rest.deserializer;
 
 import ba.unsa.etf.nsi.charlie.helpers.HibernateHelper;
-import ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity;
-import ba.unsa.etf.nsi.charlie.model.ComponentEntity;
-import ba.unsa.etf.nsi.charlie.model.ComponentTypeEntity;
-import ba.unsa.etf.nsi.charlie.model.UserEntity;
+import ba.unsa.etf.nsi.charlie.model.*;
 import com.google.gson.*;
 import org.hibernate.Session;
 
@@ -55,11 +52,9 @@ public class ComponentDeserializer implements JsonDeserializer<ComponentEntity> 
         ce.setAdditionalinfo(additionalinfo);
         ce.setComponenttype(componenttype);
         ce.setData(data);
-
         Session s = HibernateHelper.getSession();
-        ce.setUserByUserid(s.get(UserEntity.class, userid));
-        ce.setComponenttypeByComponenttype(s.get(ComponentTypeEntity.class, componenttype));
-        ce.setComponentdraftsById(new HashSet<ComponentDraftEntity>(s.createQuery("from ComponentDraftEntity t where t.componentid = :id").setParameter("id", id).list()));
+
+        ce.setComponentTypeByComponentType(s.get(ComponentTypeEntity.class, componenttype));
 
         s.close();
         return ce;

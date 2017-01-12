@@ -1,40 +1,28 @@
 package ba.unsa.etf.nsi.charlie.model;
 
 import javax.persistence.*;
-import javax.ws.rs.Path;
 import java.sql.Time;
-import java.util.Collection;
 import java.util.Date;
 
 /**
- * Created by koljenovic on 12/12/2016.
+ * Created by koljenovic on 10/01/2017.
  */
 @Entity
-@Table(name = "COMPONENT", schema = "NSI03", catalog = "")
+@Table(name = "COMPONENT", schema = "NSI03")
 public class ComponentEntity {
     private long id;
-    private Long userid;
+    private long userid;
     private String title;
     private Date updated;
-
-    public void setUpdated(Time updated) {
-        this.updated = updated;
-    }
-
     private String additionalinfo;
     private Long componenttype;
-
-    public void setComponenttype(Long componenttype) {
-        this.componenttype = componenttype;
-    }
-
     private String data;
-    private transient UserEntity userByUserid;
-    private transient ComponentTypeEntity componenttypeByComponenttype;
-    private transient Collection<ComponentDraftEntity> componentdraftsById;
+    private ComponentTypeEntity componentTypeByComponentType;
 
     @Id
     @Column(name = "ID", nullable = false, precision = 0)
+    @SequenceGenerator(name = "sequence", allocationSize = 20, sequenceName = "SEQ_COMPONENT")
+    @GeneratedValue(generator = "sequence", strategy = GenerationType.SEQUENCE)
     public long getId() {
         return id;
     }
@@ -84,9 +72,13 @@ public class ComponentEntity {
     }
 
     @Basic
-    @Column(name = "COMPONENTTYPE", nullable = true, precision = 0)
+    @Column(name = "COMPONENTTYPE", nullable = true, precision = 0, insertable=false, updatable=false)
     public Long getComponenttype() {
         return componenttype;
+    }
+
+    public void setComponenttype(Long componenttype) {
+        this.componenttype = componenttype;
     }
 
     @Basic
@@ -132,31 +124,12 @@ public class ComponentEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "USERID", referencedColumnName = "ID", nullable = false, insertable = false, updatable = false)
-    public UserEntity getUserByUserid() {
-        return userByUserid;
-    }
-
-    public void setUserByUserid(UserEntity userByUserid) {
-        this.userByUserid = userByUserid;
-    }
-
-    @ManyToOne
     @JoinColumn(name = "COMPONENTTYPE", referencedColumnName = "ID")
-    public ComponentTypeEntity getComponenttypeByComponenttype() {
-        return componenttypeByComponenttype;
+    public ComponentTypeEntity getComponentTypeByComponentType() {
+        return componentTypeByComponentType;
     }
 
-    public void setComponenttypeByComponenttype(ComponentTypeEntity componenttypeByComponenttype) {
-        this.componenttypeByComponenttype = componenttypeByComponenttype;
-    }
-
-    @OneToMany(mappedBy = "componentByComponentid")
-    public Collection<ComponentDraftEntity> getComponentdraftsById() {
-        return componentdraftsById;
-    }
-
-    public void setComponentdraftsById(Collection<ComponentDraftEntity> componentdraftsById) {
-        this.componentdraftsById = componentdraftsById;
+    public void setComponentTypeByComponentType(ComponentTypeEntity componentTypeByComponentType) {
+        this.componentTypeByComponentType = componentTypeByComponentType;
     }
 }

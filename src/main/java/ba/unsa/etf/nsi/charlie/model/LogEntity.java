@@ -1,53 +1,38 @@
 package ba.unsa.etf.nsi.charlie.model;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.util.Date;
 
 /**
- * Created by koljenovic on 12/12/2016.
+ * Created by koljenovic on 10/01/2017.
  */
 @Entity
 @Table(name = "LOG", schema = "NSI03", catalog = "")
 public class LogEntity {
     private long id;
+    private long userId;
+    private String logText;
+    private Date created;
+
+    @Id
+    @Column(name = "ID", nullable = false, precision = 0)
+    @SequenceGenerator(name = "sequence", allocationSize = 20, sequenceName = "SEQ_LOG")
+    @GeneratedValue(generator = "sequence", strategy = GenerationType.SEQUENCE)
+    public long getId() {
+        return id;
+    }
 
     public void setId(long id) {
         this.id = id;
     }
 
-    private Long userId;
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    private String logText;
-    private Date created;
-
-    public void setCreated(Time created) {
-        this.created = created;
-    }
-
-    private transient UserEntity userByUserId;
-
-    @Id
-    @Column(name = "ID", nullable = false, precision = 0)
-    public long getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     @Basic
     @Column(name = "USER_ID", nullable = false, precision = 0)
-    public Long getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 
@@ -89,19 +74,9 @@ public class LogEntity {
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + userId.intValue();
+        result = 31 * result + (int) (userId ^ (userId >>> 32));
         result = 31 * result + (logText != null ? logText.hashCode() : 0);
         result = 31 * result + (created != null ? created.hashCode() : 0);
         return result;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "USER_ID", referencedColumnName = "ID", nullable = false)
-    public UserEntity getUserByUserId() {
-        return userByUserId;
-    }
-
-    public void setUserByUserId(UserEntity userByUserId) {
-        this.userByUserId = userByUserId;
     }
 }

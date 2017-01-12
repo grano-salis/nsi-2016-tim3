@@ -2,10 +2,8 @@ package ba.unsa.etf.nsi.charlie.service.rest.front;
 
 import ba.unsa.etf.nsi.charlie.helpers.HibernateHelper;
 import ba.unsa.etf.nsi.charlie.helpers.RestHelper;
-import ba.unsa.etf.nsi.charlie.model.*;
-import ba.unsa.etf.nsi.charlie.service.rest.deserializer.*;
+import ba.unsa.etf.nsi.charlie.model.ComponentDraftEntity;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.TypeMismatchException;
@@ -32,14 +30,6 @@ public class ModelFront {
                     return Class.forName("ba.unsa.etf.nsi.charlie.model.ComponentTypeEntity");
                 case "log":
                     return Class.forName("ba.unsa.etf.nsi.charlie.model.LogEntity");
-                case "role":
-                    return Class.forName("ba.unsa.etf.nsi.charlie.model.RoleEntity");
-                case "user":
-                    return Class.forName("ba.unsa.etf.nsi.charlie.model.UserEntity");
-                case "userinfo":
-                    return Class.forName("ba.unsa.etf.nsi.charlie.model.UserInfoEntity");
-                case "userrole":
-                    return Class.forName("ba.unsa.etf.nsi.charlie.model.UserRoleEntity");
                 default:
                     throw new IllegalArgumentException("Invalid API endpoint: " + entityType);
             }
@@ -77,24 +67,33 @@ public class ModelFront {
                 .build();
     }
 
-    @GET
-    @Path("users")
+
+    @PUT
+    @Path("{entityType}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response readCollection(
-//            @PathParam("entityType") String entityType,
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateEntity(
+            @PathParam("entityType") String entityType,
             String jsonData)
     {
         Session s = HibernateHelper.getSession();
+        Transaction t = s.beginTransaction();
         String r = "{}";
-//        Class<?> classType = findClassType(entityType);
+        Class<?> classType = findClassType(entityType);
 
         final Gson g = GsonHelper.getBuilder().create();
-        Query q = s.createQuery("from UserEntity");
-
-        List<UserEntity> c = q.getResultList();
-
+        Object entity = g.fromJson(jsonData, classType);
+        s.update(classType.cast(entity));
+        try {
+            t.commit();
+        } catch (Exception e) {
+            s.close();
+            return Response.status(404).entity(r).build();
+        }
         s.close();
-        return Response.status(200).entity(g.toJson(c)).build();
+        return Response.status(200)
+                .entity(g.toJson(entity, classType))
+                .build();
     }
 
     @GET
@@ -106,6 +105,36 @@ public class ModelFront {
     {
         Class<?> classType = findClassType(entityType);
         return Response.status(200).entity(RestHelper.entityToJson(classType, id)).build();
+    }
+
+    @GET
+    @Path("componentdrafts")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response fetchDrafts()
+    {
+        Session s = HibernateHelper.getSession();
+
+        final Gson g = GsonHelper.getBuilder().create();
+        Query q = s.createQuery("from ComponentDraftEntity");
+        List<ComponentDraftEntity> c = q.getResultList();
+        s.close();
+
+        return Response.status(200).entity(g.toJson(c)).build();
+    }
+
+    @GET
+    @Path("pendingdrafts")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response readCollection()
+    {
+        Session s = HibernateHelper.getSession();
+
+        final Gson g = GsonHelper.getBuilder().create();
+        Query q = s.createQuery("from ComponentDraftEntity where status = 'PENDING' order by id asc");
+        List<ComponentDraftEntity> c = q.getResultList();
+        s.close();
+
+        return Response.status(200).entity(g.toJson(c)).build();
     }
 
     @DELETE

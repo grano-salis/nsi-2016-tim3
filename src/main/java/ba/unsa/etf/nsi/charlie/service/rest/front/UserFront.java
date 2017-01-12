@@ -3,7 +3,6 @@ package ba.unsa.etf.nsi.charlie.service.rest.front;
 import ba.unsa.etf.nsi.charlie.helpers.*;
 import ba.unsa.etf.nsi.charlie.model.*;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.hibernate.Session;
 
 import javax.persistence.Query;
@@ -14,7 +13,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.lang.reflect.Method;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -31,36 +29,45 @@ public class UserFront {
             @PathParam("collection") String collection)
     {
         String r = "{}";
+        Session s;
+        final Gson g = GsonHelper.getBuilder().create();;
         Method getter = null;
         try {
             switch (collection) {
                 case "components":
-                    getter = UserEntity.class.getDeclaredMethod("getComponentsById");
-                    r = RestHelper.<UserEntity, ComponentEntity>collectionToJson(UserEntity.class, ComponentEntity.class, id, getter);
-                    break;
-                case "componentdrafts":
-//                    getter = UserEntity.class.getDeclaredMethod("getComponentdraftsById");
-//                    r = RestHelper.<UserEntity, ComponentDraftEntity>collectionToJson(UserEntity.class, ComponentDraftEntity.class, id, getter);
-                    Session s = HibernateHelper.getSession();
+//                    getter = UserEntity.class.getDeclaredMethod("getComponentsById");
+//                    r = RestHelper.<UserEntity, ComponentEntity>collectionToJson(UserEntity.class, ComponentEntity.class, id, getter);
+                    s = HibernateHelper.getSession();
 
-                    final Gson g = GsonHelper.getBuilder().create();
-                    Query q = s.createQuery("from ComponentDraftEntity where userid = :uid");
+                    Query q = s.createQuery("from ComponentEntity where userid = :uid");
                     q.setParameter("uid", id);
-                    List<ComponentDraftEntity> c = q.getResultList();
+                    List<ComponentEntity> c = q.getResultList();
 
                     s.close();
                     r = g.toJson(c);
                     break;
+                case "componentdrafts":
+//                    getter = UserEntity.class.getDeclaredMethod("getComponentdraftsById");
+//                    r = RestHelper.<UserEntity, ComponentDraftEntity>collectionToJson(UserEntity.class, ComponentDraftEntity.class, id, getter);
+                    s = HibernateHelper.getSession();
+
+                    Query qc = s.createQuery("from ComponentDraftEntity where userid = :uid");
+                    qc.setParameter("uid", id);
+                    List<ComponentDraftEntity> cc = qc.getResultList();
+
+                    s.close();
+                    r = g.toJson(cc);
+                    break;
                 case "logs":
-                    getter = UserEntity.class.getDeclaredMethod("getLogsById");
-                    r = RestHelper.<UserEntity, LogEntity>collectionToJson(UserEntity.class, LogEntity.class, id, getter);
-                    break;
+//                    getter = UserEntity.class.getDeclaredMethod("getLogsById");
+//                    r = RestHelper.<UserEntity, LogEntity>collectionToJson(UserEntity.class, LogEntity.class, id, getter);
+//                    break;
                 case "roles":
-                    getter = UserEntity.class.getDeclaredMethod("getUserrolesById");
-                    r = RestHelper.<UserEntity, UserRoleEntity>collectionToJson(UserEntity.class, UserRoleEntity.class, id, getter);
-                    break;
+//                    getter = UserEntity.class.getDeclaredMethod("getUserrolesById");
+//                    r = RestHelper.<UserEntity, UserRoleEntity>collectionToJson(UserEntity.class, UserRoleEntity.class, id, getter);
+//                    break;
             }
-        } catch (NoSuchMethodException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return Response.status(200).entity(r).build();

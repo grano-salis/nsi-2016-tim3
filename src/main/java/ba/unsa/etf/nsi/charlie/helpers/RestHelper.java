@@ -1,19 +1,13 @@
 package ba.unsa.etf.nsi.charlie.helpers;
 
-import ba.unsa.etf.nsi.charlie.model.*;
-import ba.unsa.etf.nsi.charlie.service.rest.deserializer.*;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import org.hibernate.Session;
 import org.hibernate.TypeMismatchException;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Collection;
-import java.util.concurrent.Callable;
 
 /**
  * Created by koljenovic on 14/12/2016.

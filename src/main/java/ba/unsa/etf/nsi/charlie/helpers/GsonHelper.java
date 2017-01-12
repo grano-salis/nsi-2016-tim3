@@ -1,6 +1,10 @@
 package ba.unsa.etf.nsi.charlie.helpers;
 
-import ba.unsa.etf.nsi.charlie.model.*;
+import ba.unsa.etf.nsi.charlie.modelx.ComponentDraftEntity;
+import ba.unsa.etf.nsi.charlie.modelx.ComponentEntity;
+import ba.unsa.etf.nsi.charlie.modelx.ComponentTypeEntity;
+import ba.unsa.etf.nsi.charlie.modelx.LogEntity;
+import ba.unsa.etf.nsi.charlie.modelx.*;
 import ba.unsa.etf.nsi.charlie.service.rest.deserializer.*;
 import com.google.gson.GsonBuilder;
 
@@ -24,7 +28,7 @@ public class GsonHelper {
             gsonBuilder.registerTypeAdapter(ComponentDraftEntity.class, new ComponentDraftDeserializer());
             gsonBuilder.registerTypeAdapter(ComponentTypeEntity.class, new ComponentTypeDeserializer());
             gsonBuilder.registerTypeAdapter(LogEntity.class, new LogDeserializer());
-            gsonBuilder.registerTypeAdapter(RoleEntity.class, new RoleDeserializer());
+//            gsonBuilder.registerTypeAdapter(RoleEntity.class, new RoleDeserializer());
         }
         return gsonBuilder;
     }
